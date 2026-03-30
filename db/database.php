@@ -9,13 +9,9 @@ class DatabaseHelper {
         if($this->db->connect_error){
             die("Errore connessione DB: " . $this->db->connect_error);
         }
-
-        $this->db->set_charset("utf8mb4");
     }
 
     public function close(): void{
-        // Chiude la connessione al DB (di solito non serve chiamarla sempre,
-        // ma è utile se vuoi chiudere manualmente)
         $this->db->close();
     }
 
