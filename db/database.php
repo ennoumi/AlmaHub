@@ -73,5 +73,88 @@ class DatabaseHelper {
 
         $stmt->execute();
     }
+
+    // Controllo se è gia presente l'email 
+    public function emailExists(string $email): bool {
+        $stmt = $this->db->prepare("SELECT id_utente FROM utenti WHERE email = ? LIMIT 1");
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        $trovata = ($res && $res->num_rows > 0);
+        $stmt->close();
+        return $trovata;
+    }
+
+    public function getUserByEmail(string $email): ?array {
+        $stmt = $this->db->prepare(" SELECT id_utente, nome, cognome, email, password, ruolo, stato FROM utenti WHERE email = ? LIMIT 1");
+        if (!$stmt) {
+            return null;
+        }
+
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($res && $res->num_rows == 1) {
+            $utente = $res->fetch_assoc();
+            $stmt->close();
+            return $utente;
+        }
+        $stmt->close();
+        return null;
+    }
+
+    /*
+        Crea un nuovo utente.
+        Ritorna:
+            -1 se l'email è già presente,
+            l'id utente se va tutto bene,
+            altrimenti false se errore
+    */
+    public function createUser( string $nome, string $cognome, string $email, string $passwordPlain, string $ruolo = "user"
+    ) {
+        if ($this->emailExists($email)) {
+            return -1;
+        }
+
+        $passwordHash = password_hash($passwordPlain, PASSWORD_DEFAULT);
+        $stato = "attivo";
+        $stmt = $this->db->prepare("INSERT INTO utenti (nome, cognome, email, password, ruolo, stato)  VALUES (?, ?, ?, ?, ?, ?)");
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("ssssss", $nome, $cognome, $email, $passwordHash, $ruolo, $stato);
+        if (!$stmt->execute()) {
+            $stmt->close();
+            return false;
+        }
+
+        $idNuovoUtente = $this->db->insert_id;
+        $stmt->close();
+        return $idNuovoUtente;
+    }
+
+    // Login: controllo utente dall'email, password e stato account
+    public function checkLogin(string $email, string $passwordPlain): ?array {
+        $utente = $this->getUserByEmail($email);
+        if (!$utente) {
+            return null;
+        }
+        if (!password_verify($passwordPlain, $utente["password"])) {
+            return null;
+        }
+
+        if (($utente["stato"] ?? "") === "disattivato") {
+            return null;
+        }
+        unset($utente["password"]);
+        return $utente;
+    }
 }
 ?>
