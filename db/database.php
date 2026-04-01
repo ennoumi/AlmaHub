@@ -30,7 +30,7 @@ class DatabaseHelper {
     /*Funzione per richiamare dal DB i gruppi a cui l'utente loggato è iscritto */
 
     public function getPersonalGroups(int $userId) :array {
-        $stmt = $this->db->prepare("SELECT  FROM Gruppi G 
+        $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM Gruppi G 
                                     JOIN Iscrizioni I ON G.id_gruppo = I.id_gruppo 
                                     JOIN Utenti U ON U.id_utente=I.id_utente
                                     WHERE U.id_utente = ?");
@@ -39,7 +39,7 @@ class DatabaseHelper {
         $stmt->bind_param("i", $userId);
 
         $stmt->execute();
-        $res = stmt->get_result();
+        $res = $stmt->get_result();
         return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
     }
 
