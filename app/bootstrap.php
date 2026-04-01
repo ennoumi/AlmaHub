@@ -10,17 +10,17 @@ function redirect($path){
 }
 
 function isUserLoggedIn(){
-    return isset($_SESSION['user']);
+    return isset($_SESSION['utente']);
 }
 
 function isAdmin() {
-    if (!isset($_SESSION['user'])) {
+    if (!isset($_SESSION['utente'])) {
         return false;
     }
-    if(!isset($_SESSION['user']['ruolo'])){
+    if(!isset($_SESSION['utente']['ruolo'])){
         return false;
     }
-    return $_SESSION['user']['ruolo'] === 'admin';
+    return $_SESSION['utente']['ruolo'] === 'admin';
 }
 
 $dbh = new DatabaseHelper(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
