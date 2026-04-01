@@ -34,7 +34,7 @@ class DatabaseHelper {
                                     JOIN Iscrizioni I ON G.id_gruppo = I.id_gruppo 
                                     JOIN Utenti U ON U.id_utente=I.id_utente
                                     WHERE U.id_utente = ?");
-        if ($stmt) return false;
+        if (!$stmt) return false;
 
         $stmt->bind_param("i", $userId);
 
@@ -47,17 +47,17 @@ class DatabaseHelper {
     per la visione da parte dell'Admin sulla sua dashboard */
     public function getAllUsers() :array {
         $stmt = $this->db->prepare("SELECT nome_cognome, email FROM Utenti");
-        if ($stmt) return false;
+        if (!$stmt) return false;
 
         $stmt->execute();
-        $res = stmt->get_result();
+        $res = $stmt->get_result();
         return $res;
     }
 
     /*Funzione per disattivare un utente, prende in input l'ID utente e il motivo del ban */
     public function banUser(int $userId, string $reason) {
         $stmt = $this->db->prepare("UPDATE utenti SET stato = 'disattivato', motivo_ban = ? WHERE id_utente = ?");
-        if ($stmt) return false;
+        if (!$stmt) return false;
 
         $stmt->bind_param("is", $userId, $reason);
 
@@ -67,7 +67,7 @@ class DatabaseHelper {
     /*Funzione per riattivare un utente, prende in input l'ID utente */
     public function unbanUser(int $userId) {
         $stmt = $this->db->prepare("UPDATE utenti SET stato = 'attivato', motivo_ban = NULL WHERE id_utente = ?");
-        if ($stmt) return false;
+        if (!$stmt) return false;
 
         $stmt->bind_param("i", $userId);
 
@@ -76,6 +76,7 @@ class DatabaseHelper {
 
     // Controllo se è gia presente l'email 
     public function emailExists(string $email): bool {
+        $email = trim(strtolower($email));
         $stmt = $this->db->prepare("SELECT id_utente FROM utenti WHERE email = ? LIMIT 1");
         if (!$stmt) {
             return false;
@@ -91,6 +92,7 @@ class DatabaseHelper {
     }
 
     public function getUserByEmail(string $email): ?array {
+        $email = trim(strtolower($email));
         $stmt = $this->db->prepare(" SELECT id_utente, nome, cognome, email, password, ruolo, stato FROM utenti WHERE email = ? LIMIT 1");
         if (!$stmt) {
             return null;
@@ -118,6 +120,7 @@ class DatabaseHelper {
     */
     public function createUser( string $nome, string $cognome, string $email, string $passwordPlain, string $ruolo = "user"
     ) {
+        $email = trim(strtolower($email));
         if ($this->emailExists($email)) {
             return -1;
         }
