@@ -12,7 +12,7 @@
                 <p style="color: red;"><?php echo $templateParams['errore']; ?></p>
             <?php endif; ?>
             <?php if (!empty($templateParams['conferma'])): ?>
-                <p style="color: green;"><?php echo $templateParams['successo']; ?> 
+                <p style="color: green;"><?php echo $templateParams['conferma']; ?> 
                 <a href = "dashboard.php">Torna alla dashboard</a></p>
             <?php endif; ?>
 
@@ -35,7 +35,7 @@
             <label for="luogo">Luogo/Link</label><br/>
             <input type="text" id="luogo" name="luogo" placeholder="Aula 3 o link zoom"><br/><br/>
 
-            <label for="orario">Orario</label>
+            <label for="orario">Orario</label><br/>
             <input type="text" name="orario" id="orario" placeholder="Lun 14:00"><br/><br/>
 
             <label for="maxMembri">Numero massimo di partecipanti</label><br/>
