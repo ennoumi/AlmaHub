@@ -159,5 +159,42 @@ class DatabaseHelper {
         unset($utente["password"]);
         return $utente;
     }
+
+    public function createGroup(string $tipo, string $titolo, string $corso, string $descrizione, string $luogo, string $orario, int $maxMembri, int $idCreatore) {
+        $stmt = $this->db->prepare("INSERT INTO gruppi (tipo, titolo, corso, descrizione, luogo_incontro, orario_incontro, membri_max, id_creatore, stato) 
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'attivo')");
+
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("ssssssii", $tipo, $titolo, $corso, $descrizione, $luogo, $orario, $maxMembri, $idCreatore);
+        
+        if ($stmt->execute()) {
+            $idNuovoGruppo = $stmt->insert_id; 
+            $stmt->close(); 
+            
+            return joinGroup($idCreatore, $idNuovoGruppo);
+        } else {
+            $stmt->close();
+            return false;
+        }
+    }
+
+    public function joinGroup(int $idUtente, int $idGruppo) {
+        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo) VALUES (?, ?)");
+
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("ii", $idUtente, $idGruppo);
+        
+        $success = $stmt->execute();
+        
+        $stmt->close();
+        
+        return $success;
+    }
 }
 ?>

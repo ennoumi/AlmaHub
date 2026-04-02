@@ -8,14 +8,6 @@
         <form action="create-group.php" method="POST">
             <h1>Crea Nuovo Gruppo</h1>
 
-            <?php if (!empty($templateParams['errore'])): ?>
-                <p style="color: red;"><?php echo $templateParams['errore']; ?></p>
-            <?php endif; ?>
-            <?php if (!empty($templateParams['conferma'])): ?>
-                <p style="color: green;"><?php echo $templateParams['successo']; ?> 
-                <a href = "dashboard.php">Torna alla dashboard</a></p>
-            <?php endif; ?>
-
             <label for="tipo">Tipo:</label><br/>
             <select name="tipo" id="tipo">
                 <option value="studio">Studio</option>
