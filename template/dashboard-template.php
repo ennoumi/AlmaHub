@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1><?php echo "Bentornato, " . $_SESSION['utente']['nome'];?></h1>
-
+        <p><a href="logout.php">Logout</a></p>
         <a href="create-group.php">+ Crea Gruppo</a>
 
         <h2>I miei Gruppi</h2>

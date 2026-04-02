@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../app/bootstrap.php';
 
+// Se l'utente non è loggato, lo rimando alla pagina di login
+if(!isset($_SESSION['utente'])){
+    redirect('/login.php');
+}
+
 $templateParams['errore'] = "";
 $templateParams['conferma'] = "";
 
