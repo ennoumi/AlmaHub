@@ -11,7 +11,7 @@
 
         <h2>I miei Gruppi</h2>
         <ul>
-            <?php foreach($dashboardParams["allGroups"] as $gruppo):?>
+            <?php foreach($dashboardParams["userGroups"] as $gruppo):?>
             <li>
                 <p><?php echo $gruppo["tipo"]?></p>
                 <p><?php echo $gruppo["titolo"];?></p>
@@ -20,9 +20,9 @@
             <?php endforeach;?>
         </ul>
 
-        <h2>gruppi disponibili</h2>
+        <h2>Gruppi disponibili</h2>
         <ul>
-            <?php foreach($dashboardParams["userGroups"] as $gruppo):?>
+            <?php foreach($dashboardParams["allGroups"] as $gruppo):?>
             <li>
                 <p><?php echo $gruppo["tipo"]?></p>
                 <p><?php echo $gruppo["titolo"];?></p>
