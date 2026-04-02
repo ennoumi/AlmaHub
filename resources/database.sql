@@ -23,7 +23,6 @@ CREATE TABLE gruppi (
   corso VARCHAR(100) NOT NULL,
   descrizione TEXT,
   tipo ENUM('Studio', 'Elaborato') NOT NULL,
-  immagine_url VARCHAR(255) DEFAULT NULL,
   luogo_incontro VARCHAR(255),
   orario_incontro VARCHAR(100),
   membri_max INT DEFAULT 6,
