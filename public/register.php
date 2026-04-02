@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($res == false) {
         $templateParams['errore'] = 'Errore durante la registrazione. Riprova.';
     } else {
-        $templateParams['successo'] = 'Registrazione completata.';
+        $templateParams['successo'] = 'Registrazione avvenuta con successo.';
     }
 }
 

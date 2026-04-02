@@ -16,7 +16,8 @@
             <p style="color: red;"><?php echo $templateParams['errore']; ?></p>
         <?php endif; ?>
         <?php if (!empty($templateParams['successo'])): ?>
-            <p style="color: green;"><?php echo $templateParams['successo']; ?></p>
+            <p style="color: green;"><?php echo $templateParams['successo']; ?> Ora <a href = "login.php">accedi</a>
+        </p>
         <?php endif; ?>
 
         <form action="register.php" method="POST">
