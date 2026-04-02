@@ -20,7 +20,7 @@ class DatabaseHelper {
     */
 
     public function getAllGroups() :array{
-    $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM Gruppi");
+    $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM gruppi");
 
     $stmt->execute();
     $res = $stmt->get_result();
@@ -30,11 +30,11 @@ class DatabaseHelper {
     /*Funzione per richiamare dal DB i gruppi a cui l'utente loggato è iscritto */
 
     public function getPersonalGroups(int $userId) :array {
-        $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM Gruppi G 
-                                    JOIN Iscrizioni I ON G.id_gruppo = I.id_gruppo 
-                                    JOIN Utenti U ON U.id_utente=I.id_utente
+        $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM gruppi G 
+                                    JOIN iscrizioni I ON G.id_gruppo = I.id_gruppo 
+                                    JOIN utenti U ON U.id_utente=I.id_utente
                                     WHERE U.id_utente = ?");
-        if (!$stmt) return false;
+        if (!$stmt) return [];
 
         $stmt->bind_param("i", $userId);
 
@@ -46,12 +46,12 @@ class DatabaseHelper {
     /*Funzione per richiamare tutti gli utenti dell'applicazione
     per la visione da parte dell'Admin sulla sua dashboard */
     public function getAllUsers() :array {
-        $stmt = $this->db->prepare("SELECT nome_cognome, email FROM Utenti");
-        if (!$stmt) return false;
+        $stmt = $this->db->prepare("SELECT nome,cognome, email FROM utenti");
+        if (!$stmt) return [];
 
         $stmt->execute();
         $res = $stmt->get_result();
-        return $res;
+        return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
     }
 
     /*Funzione per disattivare un utente, prende in input l'ID utente e il motivo del ban */
@@ -59,14 +59,14 @@ class DatabaseHelper {
         $stmt = $this->db->prepare("UPDATE utenti SET stato = 'disattivato', motivo_ban = ? WHERE id_utente = ?");
         if (!$stmt) return false;
 
-        $stmt->bind_param("is", $userId, $reason);
+        $stmt->bind_param("si", $reason, $userId);
 
         $stmt->execute();
     }
 
     /*Funzione per riattivare un utente, prende in input l'ID utente */
     public function unbanUser(int $userId) {
-        $stmt = $this->db->prepare("UPDATE utenti SET stato = 'attivato', motivo_ban = NULL WHERE id_utente = ?");
+        $stmt = $this->db->prepare("UPDATE utenti SET stato = 'attivo', motivo_ban = NULL WHERE id_utente = ?");
         if (!$stmt) return false;
 
         $stmt->bind_param("i", $userId);
