@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Profilo Utente</title>
+</head>
+<body>
+    <main>
+        <h1>Il mio profilo</h1>
+        <section>
+            <h2>Dati profilo</h2>
+            <strong>Nome:</strong>
+            <strong>Cognome:</strong>
+            <strong>Email:</strong>
+            <a href="../public/dashboard.php">Torna alla dashboard</a>
+            <a href="../public/logout.php">Logout</a>
+        </section>
+
+        <section>
+            <h2>Modifica credenziali</h2>
+            <form action="#" method="post">
+                <label for="nome">Nome</label><input type="text" id="nome" name="nome"> 
+                <label for="cognome">Cognome</label><input type="text" id="cognome" name="cognome">
+                <label for="email">Email</label><input type="email" id="email" name="email">
+                <label for="password">Nuova password</label><input type="password" id="password" name="password">
+                <label for="password_confirm">Conferma nuova password</label><input type="password" id="password_confirm" name="password_confirm">
+                <button type="submit">Salva modifiche</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
