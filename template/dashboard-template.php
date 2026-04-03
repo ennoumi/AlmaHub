@@ -16,7 +16,7 @@
             <li>
                 <p><?php echo $gruppo["tipo"]?></p>
                 <p><?php echo $gruppo["titolo"];?></p>
-                
+                <p><a href="group-details.php?id=<?php echo $gruppo['id_gruppo']; ?>">Visualizza dettagli</a></p>
             </li>
             <?php endforeach;?>
         </ul>
@@ -27,7 +27,7 @@
             <li>
                 <p><?php echo $gruppo["tipo"]?></p>
                 <p><?php echo $gruppo["titolo"];?></p>
-                
+                <p><a href="group-details.php?id=<?php echo $gruppo['id_gruppo']; ?>">Visualizza dettagli</a></p>
             </li>
             <?php endforeach;?>
         </ul>
