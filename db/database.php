@@ -171,26 +171,20 @@ class DatabaseHelper {
         return 1; // Codice per "Gruppo Pieno"
     }
 
-    $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo) VALUES (?, ?)");
-    if (!$stmt) {
-        return -1;
-    }
-
-    $stmt->bind_param("ii", $idUtente, $idGruppo);
-    
-    if ($stmt->execute()) {
-        $stmt->close();
-        return 0; // Iscritto con successo
-    } else {
-        // Se l'errore è 1062 (Duplicate entry), significa che è già iscritto
-        $errore = $stmt->errno;
-        $stmt->close();
+    try {
+        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo) VALUES (?, ?)");
+        $stmt->bind_param("ii", $idUtente, $idGruppo);
         
-        if ($errore === 1062) {
+        if ($stmt->execute()) {
+            $stmt->close();
+            return 0; // Successo
+        }
+    } catch (mysqli_sql_exception $e) {
+        if ($e->getCode() === 1062) {
             return 2; // Codice per "Già iscritto"
         }
-        return -1; // Errore generico
     }
+        return -1; // Errore generico
 }
 
     public function createGroup(string $tipo, string $titolo, string $corso, string $descrizione, string $luogo, string $orario, int $maxMembri, int $idCreatore) {
