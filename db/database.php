@@ -237,5 +237,37 @@ class DatabaseHelper {
 
         return (int)($row['totale'] ?? 0);
     }
+
+    public function updateUserEmail(int $userId, string $email) {
+    /*
+        Inanzitutto controllo che la nuova email non sia già usata da un altro studente.
+    */
+    $checkMail = $this->db->prepare("SELECT id_utente FROM utenti WHERE email = ? AND id_utente <> ? LIMIT 1");
+    if (!$checkMail) {
+        return false;
+    }
+    $checkMail->bind_param("si", $email, $userId);
+    $checkMail->execute();
+
+    $resOfCheck = $checkMail->get_result();
+    if ($resOfCheck && $resOfCheck->num_rows > 0) { // Se trovo almeno una riga, significa che un altro utente ha già quella email
+        $checkMail->close();
+        return -1;
+    }
+    $checkMail->close();
+
+    /*
+        Dopo il controllo procedo con l'aggiornamento dei dati dell'utente
+    */
+    $stmt = $this->db->prepare("UPDATE utenti SET email = ? WHERE id_utente = ?");
+    if (!$stmt) {
+        return false;
+    }
+    $stmt->bind_param("si",$email, $userId);
+
+    $success = $stmt->execute();
+    $stmt->close();
+    return $success;
+    }
 }
 ?>
