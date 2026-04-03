@@ -20,7 +20,7 @@ class DatabaseHelper {
     */
 
     public function getAllGroups() :array{
-    $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM gruppi");
+    $stmt = $this->db->prepare("SELECT id_gruppo, tipo, titolo, corso FROM gruppi");
 
     $stmt->execute();
     $res = $stmt->get_result();
@@ -30,7 +30,7 @@ class DatabaseHelper {
     /*Funzione per richiamare dal DB i gruppi a cui l'utente loggato è iscritto */
 
     public function getPersonalGroups(int $userId) :array {
-        $stmt = $this->db->prepare("SELECT tipo, titolo, corso FROM gruppi G 
+        $stmt = $this->db->prepare("SELECT G.id_gruppo, tipo, titolo, corso FROM gruppi G 
                                     JOIN iscrizioni I ON G.id_gruppo = I.id_gruppo 
                                     JOIN utenti U ON U.id_utente=I.id_utente
                                     WHERE U.id_utente = ?");
@@ -160,21 +160,38 @@ class DatabaseHelper {
         return $utente;
     }
 
+    // Iscrizione al gruppo, verifica se il gruppo esiste, se è pieno o se si è già iscritti
     public function joinGroup(int $idUtente, int $idGruppo) {
-        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo) VALUES (?, ?)");
+    $details = $this->getGroupDetails($idGruppo);
+    if (empty($details)) {
+        return -1; // Gruppo inesistente
+    }
 
-        if (!$stmt) {
-            return false;
-        }
+    if ($this->countGroupParticipants($idGruppo) >= $details['membri_max']) {
+        return 1; // Codice per "Gruppo Pieno"
+    }
 
-        $stmt->bind_param("ii", $idUtente, $idGruppo);
-        
-        $success = $stmt->execute();
-        
+    $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo) VALUES (?, ?)");
+    if (!$stmt) {
+        return -1;
+    }
+
+    $stmt->bind_param("ii", $idUtente, $idGruppo);
+    
+    if ($stmt->execute()) {
+        $stmt->close();
+        return 0; // Iscritto con successo
+    } else {
+        // Se l'errore è 1062 (Duplicate entry), significa che è già iscritto
+        $errore = $stmt->errno;
         $stmt->close();
         
-        return $success;
+        if ($errore === 1062) {
+            return 2; // Codice per "Già iscritto"
+        }
+        return -1; // Errore generico
     }
+}
 
     public function createGroup(string $tipo, string $titolo, string $corso, string $descrizione, string $luogo, string $orario, int $maxMembri, int $idCreatore) {
         $stmt = $this->db->prepare("INSERT INTO gruppi (tipo, titolo, corso, descrizione, luogo_incontro, orario_incontro, membri_max, id_creatore, stato) 
@@ -195,6 +212,36 @@ class DatabaseHelper {
             $stmt->close();
             return false;
         }
+    }
+
+    public function getGroupDetails(int $idGruppo) {
+        $stmt = $this->db->prepare("SELECT titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, data_creazione, membri_max
+                                    FROM gruppi WHERE id_gruppo = ?");
+        
+        if (!$stmt) {
+                return false;
+            }
+        
+        $stmt->bind_param("i", $idGruppo);
+        $stmt->execute();
+        $groupDetails = $stmt->get_result();
+
+        $stmt->close();
+        
+        return $groupDetails->fetch_assoc() ?? [];
+    }
+
+    public function countGroupParticipants(int $idGruppo) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as totale FROM iscrizioni WHERE id_gruppo = ?");
+        $stmt->bind_param("i", $idGruppo);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        
+        $stmt->close();
+
+        return (int)($row['totale'] ?? 0);
     }
 }
 ?>
