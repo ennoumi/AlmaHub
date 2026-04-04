@@ -269,5 +269,22 @@ class DatabaseHelper {
     $stmt->close();
     return $success;
     }
+
+    /*
+        Funzione per cambiare la password
+    */
+    public function updatePassword($userId, $newPassword) {
+        $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $this->db->prepare("UPDATE utenti SET password = ? WHERE id_utente = ?");
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("si", $hash, $userId);
+        $success = $stmt->execute();
+        $stmt->close();
+
+        return $success;
+    }
 }
 ?>
