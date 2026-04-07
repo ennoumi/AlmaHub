@@ -22,6 +22,7 @@
             $email = '';
             if (isset($_POST['email'])) {
                 $email = $_POST['email'];
+                $email = strtolower($email);
             }
 
             if ($email === '') {
