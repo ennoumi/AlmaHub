@@ -10,18 +10,23 @@ if (isset($_SESSION['utente'])) {
 $templateParams["errore"] = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    if(isset($_POST["email"]) && isset($_POST["password"])){
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
 
-    $user = $dbh->checkLogin($email, $password);
+        if($email != "" && $password != ""){ 
+            $user = $dbh->checkLogin($email, $password);
 
-    if ($user) {
-        $_SESSION['utente'] = $user;
-
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        $templateParams["errore"] = "Credenziali non valide o account disattivato.";
+            if ($user) {
+                $_SESSION['utente'] = $user;
+                header("Location: dashboard.php");
+                exit();
+            } else {
+                $templateParams["errore"] = "Credenziali non valide o account disattivato.";
+            }
+        } else {
+            $templateParams["errore"] = "Compila email e password.";
+        }
     }
 }
 
