@@ -6,7 +6,7 @@ if(!isset($_SESSION['utente'])){
     redirect('/login.php');
 }
 
-$dashboardParams["allGroups"] = $dbh -> getAllGroups();
+$dashboardParams["availableGroups"] = $dbh -> getAvailableGroups($_SESSION['utente']['id_utente']);
 $dashboardParams["userGroups"] = $dbh -> getPersonalGroups($_SESSION['utente']['id_utente']);
 
 require __DIR__ . '/../template/dashboard-template.php';

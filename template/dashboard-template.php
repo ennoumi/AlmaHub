@@ -24,7 +24,7 @@
 
         <h2>Gruppi disponibili</h2>
         <ul>
-            <?php foreach($dashboardParams["allGroups"] as $gruppo):?>
+            <?php foreach($dashboardParams["availableGroups"] as $gruppo):?>
             <li>
                 <p><?php echo $gruppo["tipo"]?></p>
                 <p><?php echo $gruppo["titolo"];?></p>
