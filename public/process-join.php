@@ -17,3 +17,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id_gruppo"])) {
     echo json_encode([ 'risultato' => $res ]);
     exit();
 }
+?>
