@@ -57,3 +57,14 @@ CREATE TABLE registro_attivita (
   data_evento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_utente) REFERENCES utenti(id_utente) ON DELETE SET NULL
 );
+
+-- TABELLA MESSAGGI (CHAT)
+CREATE TABLE messaggi (
+  id_messaggio INT AUTO_INCREMENT PRIMARY KEY,
+  id_utente INT NOT NULL,
+  id_gruppo INT NOT NULL,
+  corpo_messaggio TEXT NOT NULL,
+  data_invio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_utente) REFERENCES utenti(id_utente) ON DELETE CASCADE,
+  FOREIGN KEY (id_gruppo) REFERENCES gruppi(id_gruppo) ON DELETE CASCADE
+);
