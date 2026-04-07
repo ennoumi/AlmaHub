@@ -43,6 +43,19 @@ class DatabaseHelper {
         return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
     }
 
+    public function getAvailableGroups(int $idUtente) :array {
+        $query = "SELECT * FROM gruppi 
+                    WHERE id_gruppo NOT IN 
+                    (SELECT id_gruppo FROM iscrizioni WHERE id_utente = ?)";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idUtente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     /*Funzione per richiamare tutti gli utenti dell'applicazione
     per la visione da parte dell'Admin sulla sua dashboard */
     public function getAllUsers() :array {
@@ -285,6 +298,51 @@ class DatabaseHelper {
         $stmt->close();
 
         return $success;
+    }
+
+    public function getMessages(int $idGruppo) {
+        $stmt = $this->db->prepare("SELECT m.data_invio, u.nome, u.cognome, m.corpo_messaggio 
+                                    FROM messaggi m 
+                                    JOIN utenti u ON m.id_utente = u.id_utente
+                                    WHERE m.id_gruppo = ?
+                                    ORDER BY m.data_invio ASC");
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("i", $idGruppo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $messages = $result->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        
+        return $messages;
+    }
+
+    public function sendMessage(int $idUtente, int $idGruppo, string $messaggio) {
+        $stmt = $this->db->prepare("INSERT INTO messaggi (id_utente, id_gruppo, corpo_messaggio) VALUES (?, ?, ?)");
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("iis", $idUtente, $idGruppo, $messaggio);
+        $success = $stmt->execute();
+        $stmt->close();
+        
+        return $success;
+    }
+
+    public function isUserInGroup(int $idUtente, $idGruppo) {
+        $query = "SELECT * FROM iscrizioni WHERE id_utente = ? AND id_gruppo = ?"; 
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $idUtente, $idGruppo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->num_rows > 0;
     }
 }
 ?>
