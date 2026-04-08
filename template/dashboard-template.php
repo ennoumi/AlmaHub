@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <?php if (isAdmin()): ?>
+        <p><a href="admin.php">Pannello Admin</a></p>
+    <?php endif; ?>
 </head>
 <body>
     <h1><?php echo "Bentornato, " . $_SESSION['utente']['nome'];?></h1>
