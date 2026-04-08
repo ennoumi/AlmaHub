@@ -185,12 +185,15 @@ class DatabaseHelper {
     }
 
     try {
-        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo) VALUES (?, ?)");
-        $stmt->bind_param("ii", $idUtente, $idGruppo);
+        $tipologia = $details['tipo'];
+        $statoIniziale = ($tipologia == "Elaborato") ? "in_attesa" : "confermato"; //Se il gruppo è di elaborato inizialmente lo stato di iscrizione è "in attesa", altrimenti "confermato"
+
+        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo, stato) VALUES (?, ?, ?)");
+        $stmt->bind_param("iis", $idUtente, $idGruppo, $statoIniziale);
         
         if ($stmt->execute()) {
             $stmt->close();
-            return 0; // Successo
+            return $tipologia ? 3 : 0; // Se il gruppo è di elaborato restituisce 3 (in attesa), altrimenti 0 (confermato)
         }
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() === 1062) {
@@ -239,7 +242,7 @@ class DatabaseHelper {
     }
 
     public function countGroupParticipants(int $idGruppo) {
-        $stmt = $this->db->prepare("SELECT COUNT(*) as totale FROM iscrizioni WHERE id_gruppo = ?");
+        $stmt = $this->db->prepare("SELECT COUNT(*) as totale FROM iscrizioni WHERE id_gruppo = ? AND stato = 'confermato'");
         $stmt->bind_param("i", $idGruppo);
         $stmt->execute();
         
@@ -351,6 +354,48 @@ class DatabaseHelper {
         $stmt->bind_param("ii", $idUtente, $idGruppo);
         
         return $stmt->execute();
+    }
+
+    public function getPendingRequests(int $idFondatore) {
+        $stmt = $this->db->prepare("SELECT u.nome, u.cognome, g.titolo, g.tipo, i.id_utente, i.id_gruppo, i.data_adesione 
+                                    FROM iscrizioni i
+                                    JOIN utenti u ON i.id_utente = u.id_utente
+                                    JOIN gruppi g ON i.id_gruppo = g.id_gruppo
+                                    WHERE g.id_creatore = ? AND i.stato = 'in_attesa'
+                                    ORDER BY i.data_adesione ASC");
+
+        $stmt->bind_param("i", $idFondatore);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getSentRequests(int $idUtente) {
+        $stmt = $this->db->prepare("SELECT g.titolo, g.id_gruppo, g.tipo, i.data_adesione, i.stato
+                                    FROM iscrizioni i
+                                    JOIN gruppi g ON i.id_gruppo = g.id_gruppo
+                                    WHERE i.id_utente = ? AND i.stato = 'in_attesa'
+                                    ORDER BY i.data_adesione DESC");
+
+        $stmt->bind_param("i", $idUtente);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function manageRequest(int $idUtente, int $idGruppo, bool $accetta) {
+        if ($accetta) {
+            $query = "UPDATE iscrizioni SET stato = 'confermato' 
+                    WHERE id_utente = ? AND id_gruppo = ? AND stato = 'in_attesa'";
+        } else {
+            $query = "DELETE FROM iscrizioni WHERE id_utente = ? AND id_gruppo = ?";
+        }
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $idUtente, $idGruppo);
+        
+        $res = $stmt->execute();
+        $stmt->close();
+        
+        return $res;
     }
 }
 ?>
