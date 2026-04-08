@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Admin</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Gestione della piattaforma</h1>
+            <p>
+                <a href="../public/dashboard.php">Torna alla dashboard</a> | <a href="../public/logout.php">Logout</a>
+            </p>
+        </header>
+
+        <section>
+            <h2>Statistiche</h2>
+            <ul>
+                <li>Gruppi creati: </li>
+                <li>Studenti registrati: </li>
+                <li>Studenti attivi: </li>
+                <li>Studenti disattivati: </li>
+                <li>Messaggi totali: </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Gruppi creati</h2>
+            <ul>
+                <li>
+                    <strong>Gruppo per studiare MDP</strong><br>
+                    Tipo gruppo: Studio<br>
+                    Corso: Mdp<br>
+                    Creatore: <br>
+                    Partecipanti: <br>
+                    Messaggi inviati: <br>
+                </li>
+                <li>
+                    <strong>Gruppo per il progetto di IOT</strong><br>
+                    Tipo gruppo: Progetto<br>
+                    Corso: Iot<br>
+                    Creatore: <br>
+                    Partecipanti: <br>
+                    Messaggi inviati: <br>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Studenti</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Studente</th>
+                        <th>Email</th>
+                        <th>Stato</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Studente 1</td>
+                        <td>studente1@almahub.com</td>
+                        <td>attivo</td>
+                        <td>
+                            <button type="button">Disattiva</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Studente 2</td>
+                        <td>studente2@almahub.com</td>
+                        <td>attivo</td>
+                        <td>
+                            <button type="button">Disattiva</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Messaggi del gruppo</h2>
+            <form>
+                <label for="group_id">Seleziona gruppo:</label>
+                <select id="group_id" name="group_id">
+                    <option value="1">Gruppo per studiare MDP</option>
+                    <option value="2">Gruppo per il progetto di IOT</option>
+                </select>
+                <button type="button">Visualizza messaggi</button>
+            </form>
+            <p>Qui sotto quindi riporto i messaggi del gruppo che ho selezionato</p>
+            <ul>
+                <li>
+                    Data - Autore messaggio<br>
+                    Messaggio 1
+                </li>
+                <li>
+                    Data - Autore messaggio<br>
+                    Messaggio 2
+                </li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
