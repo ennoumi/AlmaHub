@@ -3,7 +3,11 @@ require_once __DIR__ . '/../app/bootstrap.php';
 
 // se l'utente è già loggato reindirizza alla dashboard
 if (isset($_SESSION['utente'])) {
-    header("Location: dashboard.php");
+    if(isAdmin()){
+        header("Location: admin.php");
+    } else {
+        header("Location: dashboard.php");
+    }
     exit();
 }
 
@@ -19,7 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($user) {
                 $_SESSION['utente'] = $user;
-                header("Location: dashboard.php");
+                    if(isAdmin()){
+                        header("Location: admin.php");
+                    } else {
+                        header("Location: dashboard.php");
+                    }
                 exit();
             } else {
                 $templateParams["errore"] = "Credenziali non valide o account disattivato.";
