@@ -55,6 +55,12 @@
                 <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
                 <button type="submit">PARTECIPA AL GRUPPO</button>
             </form>
+        <?php else: ?>
+            <p>Sei membro di questo gruppo</p>
+            <form id="disiscrizione">
+                <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
+                <button type="submit">ESCI DAL GRUPPO</button>
+            </form>
         <?php endif; ?>
 
     <?php else: ?>
@@ -62,30 +68,56 @@
     <?php endif; ?>
 
     <script>
-    document.getElementById('iscrizione').addEventListener('submit', function(e) {
-        e.preventDefault();
+        document.getElementById('iscrizione').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        const formData = new FormData(this);
+            const formData = new FormData(this);
 
-        fetch('process-join.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.risultato === 0) {
-                alert("Iscrizione avvenuta con successo!");
-                location.reload(); // Ricarica per aggiornare il numero di iscritti
-            } else if (data.risultato === 1) {
-                alert("Il gruppo è pieno.");
-            } else if (data.risultato === 2) {
-                alert("Sei già iscritto a questo gruppo.");
-            } else {
-                alert("Errore durante l'iscrizione.");
-            }
-        })
-        .catch(error => alert("Errore di connessione."));
-    });
+            fetch('process-join.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.risultato === 0) {
+                    alert("Iscrizione avvenuta con successo!");
+                    location.reload(); // Ricarica per aggiornare il numero di iscritti
+                } else if (data.risultato === 1) {
+                    alert("Il gruppo è pieno.");
+                } else if (data.risultato === 2) {
+                    alert("Sei già iscritto a questo gruppo.");
+                } else {
+                    alert("Errore durante l'iscrizione.");
+                }
+            })
+            .catch(error => alert("Errore di connessione."));
+        });
+    </script>
+
+    <script>
+        document.getElementById('disiscrizione')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Conferma di uscita
+            if (!confirm("Sei sicuro di voler uscire da questo gruppo?")) return;
+
+            const formData = new FormData(this);
+
+            fetch('process-quit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.risultato) {
+                    alert("Hai abbandonato il gruppo con successo.");
+                    location.reload(); // Ricarica per aggiornamento numero iscritti, eliminazione chat e tasto di iscrizione
+                } else {
+                    alert("Errore durante l'operazione di disiscrizione.");
+                }
+            })
+            .catch(error => alert("Errore di connessione."));
+        });
     </script>
 
     <h3>Chat di Gruppo</h3>

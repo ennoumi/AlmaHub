@@ -344,5 +344,13 @@ class DatabaseHelper {
         
         return $result->num_rows > 0;
     }
+
+    public function quitGroup(int $idUtente, int $idGruppo) {
+        $stmt = $this->db->prepare("DELETE FROM iscrizioni WHERE id_utente = ? AND id_gruppo = ?");
+        
+        $stmt->bind_param("ii", $idUtente, $idGruppo);
+        
+        return $stmt->execute();
+    }
 }
 ?>
