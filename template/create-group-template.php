@@ -20,7 +20,6 @@
             <select name="tipo" id="tipo">
                 <option value="studio">Studio</option>
                 <option value="elaborato">Elaborato</option>
-                <option value="progetto">Progetto</option>
             </select><br/><br/>
 
             <label for="titolo">Titolo:</label><br/>
