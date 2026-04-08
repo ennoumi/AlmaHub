@@ -4,8 +4,8 @@ require_once __DIR__ . '/../app/bootstrap.php';
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['utente'])) {
-    header('Location: login.php');
-    exit();
+    echo json_encode(['risultato' => 100]); 
+    exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id_gruppo"])) {
