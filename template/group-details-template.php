@@ -86,6 +86,8 @@
                     alert("Il gruppo è pieno.");
                 } else if (data.risultato === 2) {
                     alert("Sei già iscritto a questo gruppo.");
+                } else if (data.risultato === 3) {
+                    alert("Richiesta di iscrizione inviata.");
                 } else {
                     alert("Errore durante l'iscrizione.");
                 }
