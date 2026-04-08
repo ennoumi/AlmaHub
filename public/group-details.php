@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/../app/bootstrap.php';
 
-if(!isset($_SESSION['utente'])){
-    redirect('/login.php');
+if (!isset($_SESSION['utente'])) {
+    header('Location: login.php');
+    exit();
 }
 
 $idGruppo = $_GET['id'] ?? null;

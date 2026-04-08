@@ -4,7 +4,7 @@ require_once __DIR__ . '/../app/bootstrap.php';
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['utente'])) {
-    echo json_encode(['status' => 'error', 'message' => 'Login richiesto']);
+    header('Location: login.php');
     exit();
 }
 
