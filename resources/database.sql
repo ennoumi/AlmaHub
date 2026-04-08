@@ -39,6 +39,7 @@ CREATE TABLE iscrizioni (
   id_utente INT NOT NULL,
   id_gruppo INT NOT NULL,
   data_adesione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  stato ENUM('confermato', 'in_attesa') NOT NULL DEFAULT 'in_attesa',
   UNIQUE KEY uk_iscrizione (id_utente, id_gruppo),
   FOREIGN KEY (id_utente) REFERENCES utenti(id_utente) ON DELETE CASCADE,
   FOREIGN KEY (id_gruppo) REFERENCES gruppi(id_gruppo) ON DELETE CASCADE
