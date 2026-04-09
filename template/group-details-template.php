@@ -27,6 +27,8 @@
 </head>
 <body>
 
+<?php include 'layout/header.php'; ?>
+
     <p><a href="dashboard.php">← Torna indietro</a></p>
 
     <?php if(!empty($templateParams["gruppo"])): ?>
@@ -173,6 +175,7 @@
         <?php else: ?>
         <p>Solo i membri di questo gruppo possono visualizzare la chat e inviare messaggi.</p>
     <?php endif; ?>
-
+        
+    <?php include 'layout/footer.php'; ?>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <title>Membri</title>
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <h1>Membri di: <?php echo $gruppo['titolo']?></h1>
         <p><a href="group-details.php?id=<?php echo $idGruppo; ?>"> Torna al Gruppo</a></p>
         <ul>
@@ -19,5 +20,6 @@
             </li>
             <?php endforeach;?>
         </ul>
+        <?php include 'layout/footer.php'; ?>
     </body>
 </html>

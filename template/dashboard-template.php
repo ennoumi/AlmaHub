@@ -9,9 +9,9 @@
     <?php endif; ?>
 </head>
 <body>
-    <h1><?php echo "Bentornato, " . $_SESSION['utente']['nome'];?></h1>
-        <p><a href="profile.php">Profilo</a></p>
-        <p><a href="logout.php">Logout</a></p>
+    <?php include 'layout/header.php'; ?>
+    <main>
+        <h1><?php echo "Bentornato, " . $_SESSION['utente']['nome'];?></h1>
         <a href="create-group.php">+ Crea Gruppo</a>
 
         <h2>I miei Gruppi</h2>
@@ -35,5 +35,7 @@
             </li>
             <?php endforeach;?>
         </ul>
+    </main>
+    <?php include 'layout/footer.php'; ?>
     </body>
 </html>

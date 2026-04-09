@@ -6,8 +6,8 @@
     <title>Richieste</title>
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <h1><?php echo "Richieste in corso:"?></h1>
-        <p><a href="dashboard.php">Torna alla dashboard</a></p>
 
         <h2>Richieste in entrata:</h2>
         <ul>
@@ -61,5 +61,6 @@
                 });
             }
         </script>
+        <?php include 'layout/footer.php'; ?>
     </body>
 </html>

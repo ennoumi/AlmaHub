@@ -6,6 +6,7 @@
     <title>Profilo utente</title>
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <main>
         <h1><?php echo $templateParams['isOwner'] ? "Il mio profilo" : "Profilo di " . htmlspecialchars($user['nome'] . ' ' . $user['cognome']) ; ?></h1>
 
@@ -67,5 +68,6 @@
             <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
         <?php endif; ?>
     </main>
+    <?php include 'layout/footer.php'; ?>
 </body>
 </html>

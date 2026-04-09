@@ -6,6 +6,7 @@
     <title>Registrazione</title>
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <main>
         <h1>Crea un account</h1>
         <p>
@@ -38,5 +39,6 @@
 
         <p>Hai già un account? <a href="login.php">Accedi</a></p>
     </main>
+    <?php include 'layout/footer.php'; ?>
 </body>
 </html>

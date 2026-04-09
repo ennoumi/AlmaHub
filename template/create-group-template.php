@@ -4,6 +4,7 @@
     <title>Crea Gruppo</title>
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <main>
         <form action="create-group.php" method="POST">
             <h1>Crea Nuovo Gruppo</h1>
@@ -43,5 +44,6 @@
             <button type="submit">Crea Gruppo</button>
         </form>
     </main>
+    <?php include 'layout/footer.php'; ?>
 </body>
 </html>

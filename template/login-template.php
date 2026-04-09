@@ -4,6 +4,7 @@
     <title>AlmaHub - Login</title>
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <main>
         <form action="login.php" method="POST">
             <h1>Accedi ad AlmaHub</h1>
@@ -22,5 +23,6 @@
         </form>
         <p>Non hai un account? <a href="register.php">Registrati</a></p>
     </main>
+    <?php include 'layout/footer.php'; ?>
 </body>
 </html>
