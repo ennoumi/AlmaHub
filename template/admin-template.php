@@ -91,15 +91,19 @@
                 </select>
                 <button type="submit">Visualizza</button>
             </form>
-            <ul>
-                <?php foreach ($adminParams['messages'] as $m): ?>
-                    <li>
-                        <?= $m['data_invio'] ?> -
-                        <?= htmlspecialchars($m['nome'] . ' ' . $m['cognome']) ?><br>
-                        <?= htmlspecialchars($m['corpo_messaggio']) ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <?php if (empty($adminParams['messages'])): ?>
+                <p>Questo gruppo non ha messaggi.</p>
+            <?php else: ?>
+                <ul>
+                    <?php foreach ($adminParams['messages'] as $m): ?>
+                            <li>
+                                <?= $m['data_invio'] ?> -
+                                <?= htmlspecialchars($m['nome'] . ' ' . $m['cognome']) ?><br>
+                                <?= htmlspecialchars($m['corpo_messaggio']) ?>
+                            </li>
+                        <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </section>
     </main>
 </body>
