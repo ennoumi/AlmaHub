@@ -36,7 +36,7 @@
         <p><i>Corso: <?php echo $templateParams["gruppo"]["corso"]; ?></i></p>
 
         <ul>
-            <li>Partecipanti: <?php echo $templateParams["gruppo"]["numPartecipanti"]; ?> / <?php echo $templateParams["gruppo"]["membri_max"]; ?></li>
+            <li><a href="group-members.php?id=<?php echo $templateParams["gruppo"]["id_gruppo"]; ?>">Partecipanti: <?php echo $templateParams["gruppo"]["numPartecipanti"]; ?> / <?php echo $templateParams["gruppo"]["membri_max"]; ?></a></li>
             <li>Data: <?php echo $templateParams["gruppo"]["data_creazione"]; ?></li>
             <li>Luogo: <?php echo $templateParams["gruppo"]["luogo_incontro"]; ?></li>
         </ul>
