@@ -195,6 +195,25 @@ class DatabaseHelper {
         return null;
     }
 
+    public function getProfileInfo(string $idUtente): ?array {
+        $stmt = $this->db->prepare(" SELECT nome, cognome, email, data_iscrizione FROM utenti WHERE id_utente = ? LIMIT 1");
+        if (!$stmt) {
+            return null;
+        }
+
+        $stmt->bind_param("i", $idUtente);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($res && $res->num_rows == 1) {
+            $utente = $res->fetch_assoc();
+            $stmt->close();
+            return $utente;
+        }
+        $stmt->close();
+        return null;
+    }
+
     /*
         Crea un nuovo utente.
         Ritorna:
@@ -474,7 +493,7 @@ class DatabaseHelper {
     }
 
     public function getGroupMembers($idGruppo) {
-        $stmt = $this->db->prepare("SELECT  u.nome, u.cognome, u.email, i.ruolo, i.data_adesione 
+        $stmt = $this->db->prepare("SELECT  u.id_utente, u.nome, u.cognome, u.email, i.ruolo, i.data_adesione 
                                     FROM utenti u 
                                     JOIN iscrizioni i ON u.id_utente = i.id_utente 
                                     WHERE i.id_gruppo = ? 

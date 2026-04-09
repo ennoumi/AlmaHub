@@ -7,7 +7,7 @@
 </head>
 <body>
     <main>
-        <h1>Il mio profilo</h1>
+        <h1><?php echo $templateParams['isOwner'] ? "Il mio profilo" : "Profilo di " . htmlspecialchars($user['nome'] . ' ' . $user['cognome']) ; ?></h1>
 
         <?php if (!empty($templateParams['errore'])): ?>
             <p style="color: red;"><?php echo htmlspecialchars($templateParams['errore']); ?></p>
@@ -16,7 +16,8 @@
             <p style="color: green;"><?php echo htmlspecialchars($templateParams['successo']); ?></p>
         <?php endif; ?>
 
-        <section>
+        <?php if ($templateParams['isOwner']): ?>
+            <section>
             <h2>Dati profilo</h2>
             <p><strong>Nome:</strong> <?php echo htmlspecialchars($utente['nome']); ?></p>
             <p><strong>Cognome:</strong> <?php echo htmlspecialchars($utente['cognome']); ?></p>
@@ -59,6 +60,12 @@
                 </fieldset>
             </form>
         </section>
+        <?php else: ?>
+            <h2>Dati profilo</h2>
+            <p><strong>Nome:</strong> <?php echo htmlspecialchars($user['nome']); ?></p>
+            <p><strong>Cognome:</strong> <?php echo htmlspecialchars($user['cognome']); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+        <?php endif; ?>
     </main>
 </body>
 </html>

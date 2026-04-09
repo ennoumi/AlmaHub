@@ -15,6 +15,7 @@
                 <p><?php echo $m["cognome"];?></p>
                 <p><?php echo $m["email"];?></p>
                 <p><?php echo $m["ruolo"];?></p>
+                <a href="profile.php?user=<?php echo $m['id_utente'];?>">Profilo</a>
             </li>
             <?php endforeach;?>
         </ul>
