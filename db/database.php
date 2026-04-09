@@ -245,7 +245,7 @@ class DatabaseHelper {
     }
 
     // Iscrizione al gruppo, verifica se il gruppo esiste, se è pieno o se si è già iscritti
-    public function joinGroup(int $idUtente, int $idGruppo) {
+    public function joinGroup(int $idUtente, int $idGruppo, string $ruolo='Membro') {
     $details = $this->getGroupDetails($idGruppo);
     if (empty($details)) {
         return -1; // Gruppo inesistente
@@ -256,11 +256,15 @@ class DatabaseHelper {
     }
 
     try {
-        $tipologia = $details['tipo'];
-        $statoIniziale = ($tipologia == "Elaborato") ? "in_attesa" : "confermato"; //Se il gruppo è di elaborato inizialmente lo stato di iscrizione è "in attesa", altrimenti "confermato"
-
-        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo, stato) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $idUtente, $idGruppo, $statoIniziale);
+        if($ruolo == "Fondatore") {
+            $statoIniziale = "Confermato";
+        } else {
+            $tipologia = $details['tipo'];
+            $statoIniziale = ($tipologia == "Elaborato") ? "in_attesa" : "confermato"; //Se il gruppo è di elaborato inizialmente lo stato di iscrizione è "in attesa", altrimenti "confermato"
+        }
+        
+        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo, stato, ruolo) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiss", $idUtente, $idGruppo, $statoIniziale, $ruolo);
         
         if ($stmt->execute()) {
             $stmt->close();
@@ -288,7 +292,7 @@ class DatabaseHelper {
             $idNuovoGruppo = $stmt->insert_id; 
             $stmt->close(); 
             
-            return $this->joinGroup($idCreatore, $idNuovoGruppo);
+            return $this->joinGroup($idCreatore, $idNuovoGruppo, "Fondatore") === 0;
         } else {
             $stmt->close();
             return false;
@@ -296,7 +300,7 @@ class DatabaseHelper {
     }
 
     public function getGroupDetails(int $idGruppo) {
-        $stmt = $this->db->prepare("SELECT titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, data_creazione, membri_max
+        $stmt = $this->db->prepare("SELECT id_gruppo, titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, data_creazione, membri_max
                                     FROM gruppi WHERE id_gruppo = ?");
         
         if (!$stmt) {
@@ -467,6 +471,21 @@ class DatabaseHelper {
         $stmt->close();
         
         return $res;
+    }
+
+    public function getGroupMembers($idGruppo) {
+        $stmt = $this->db->prepare("SELECT  u.nome, u.cognome, u.email, i.ruolo, i.data_adesione 
+                                    FROM utenti u 
+                                    JOIN iscrizioni i ON u.id_utente = i.id_utente 
+                                    WHERE i.id_gruppo = ? 
+                                    AND i.stato = 'confermato' 
+                                    ORDER BY i.data_adesione DESC");
+        $stmt->bind_param("i", $idGruppo);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
 ?>
