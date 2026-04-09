@@ -56,10 +56,9 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*Funzione per richiamare tutti gli utenti dell'applicazione
-    per la visione da parte dell'Admin sulla sua dashboard */
+    /* Funzione che restituisce tutti gli utenti per la tabella admin */
     public function getAllUsers() :array {
-        $stmt = $this->db->prepare("SELECT nome,cognome, email FROM utenti");
+        $stmt = $this->db->prepare("SELECT id_utente, nome, cognome, email, ruolo, stato, data_iscrizione FROM utenti ORDER BY cognome, nome");
         if (!$stmt) return [];
 
         $stmt->execute();
@@ -67,24 +66,96 @@ class DatabaseHelper {
         return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
     }
 
-    /*Funzione per disattivare un utente, prende in input l'ID utente e il motivo del ban */
-    public function banUser(int $userId, string $reason) {
-        $stmt = $this->db->prepare("UPDATE utenti SET stato = 'disattivato', motivo_ban = ? WHERE id_utente = ?");
-        if (!$stmt) return false;
-
-        $stmt->bind_param("si", $reason, $userId);
-
-        $stmt->execute();
-    }
-
-    /*Funzione per riattivare un utente, prende in input l'ID utente */
-    public function unbanUser(int $userId) {
-        $stmt = $this->db->prepare("UPDATE utenti SET stato = 'attivo', motivo_ban = NULL WHERE id_utente = ?");
+    /*Funzione per disattivare un utente */
+    public function banUser(int $userId): bool {
+        $stmt = $this->db->prepare("UPDATE utenti SET stato = 'disattivato' WHERE id_utente = ?");
         if (!$stmt) return false;
 
         $stmt->bind_param("i", $userId);
 
+        $res = $stmt->execute();
+        $stmt->close();
+        return $res;
+    }
+
+    /*Funzione per riattivare un utente */
+    public function unbanUser(int $userId) {
+        $stmt = $this->db->prepare("UPDATE utenti SET stato = 'attivo' WHERE id_utente = ?");
+        if (!$stmt) return false;
+
+        $stmt->bind_param("i", $userId);
+        
+        $res = $stmt->execute();
+        $stmt->close();
+        return $res;
+    }
+
+    /* Funzione per restituire le statistiche generali per il pannello admin */
+    public function getAdminStats(): array {
+        $stmt = $this->db->prepare("SELECT 
+            (SELECT COUNT(*) FROM gruppi) AS totale_gruppi,
+            (SELECT COUNT(*) FROM messaggi) AS totale_messaggi,
+            (SELECT COUNT(*) FROM utenti WHERE ruolo = 'user') AS totale_studenti,
+            (SELECT COUNT(*) FROM utenti WHERE ruolo = 'user' AND stato = 'attivo') AS studenti_attivi,
+            (SELECT COUNT(*) FROM utenti WHERE ruolo = 'user' AND stato = 'disattivato') AS studenti_disattivati");
+        
+        $defaultArray = [
+            'totale_gruppi' => 0,
+            'totale_messaggi' => 0,
+            'totale_studenti' => 0,
+            'studenti_attivi' => 0,
+            'studenti_disattivati' => 0,
+        ];
+        
+        if(!$stmt){
+            return $defaultArray;
+        }
+
         $stmt->execute();
+        $result = $stmt->get_result();
+        $stats = $result ? $result->fetch_assoc() : [];
+        $stmt->close();
+
+        return array_merge($defaultArray, $stats);
+    }
+
+    /* Funzione che restituisce tutti i gruppi con le relative informazioni per l'admin */
+    public function getGroupsForAdmin(): array {
+        $stmt = $this->db->prepare("SELECT g.id_gruppo, g.titolo, g.corso, g.tipo, g.stato, g.data_creazione, g.membri_max, CONCAT(u.nome, ' ', u.cognome) AS creatore, COUNT(DISTINCT i.id_iscrizione) AS partecipanti, COUNT(DISTINCT m.id_messaggio) AS messaggi
+        FROM gruppi g
+        LEFT JOIN utenti u ON g.id_creatore = u.id_utente
+        LEFT JOIN iscrizioni i ON g.id_gruppo = i.id_gruppo AND i.stato = 'confermato'
+        LEFT JOIN messaggi m ON g.id_gruppo = m.id_gruppo
+        GROUP BY g.id_gruppo ORDER BY g.data_creazione DESC");
+
+        if (!$stmt) {
+            return [];
+        }
+
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $groups = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+        $stmt->close();
+
+        return $groups;
+    }
+
+    /* Funzione che restituisce i messaggi che sono stati inviati nella chat di un gruppo */
+    public function getMessagesForAdmin(int $idGruppo): array {
+        $stmt = $this->db->prepare("SELECT m.data_invio, u.nome, u.cognome, m.corpo_messaggio
+            FROM messaggi m JOIN utenti u ON m.id_utente = u.id_utente WHERE m.id_gruppo = ? ORDER BY m.data_invio ASC");
+
+        if (!$stmt) {
+            return [];
+        }
+
+        $stmt->bind_param("i", $idGruppo);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $messages = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+        $stmt->close();
+
+        return $messages;
     }
 
     // Controllo se è gia presente l'email 
