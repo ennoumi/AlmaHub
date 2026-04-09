@@ -7,9 +7,7 @@
 </head>
 <body>
 
-  <header>
-    <h1>AlmaHub</h1>
-  </header>
+  <?php include '../template/layout/header.php'; ?>
 
   <main>
     <section>
@@ -24,13 +22,6 @@
         <!-- qui mettiamo un'immagine -->
         <img src="#"/>
       </figure>
-
-      <nav>
-        <ul>
-          <li><a href="../public/login.php">Accedi</a></li>
-          <li><a href="../public/register.php">Registrati</a></li>
-        </ul>
-      </nav>
     </section>
 
     <section>
@@ -53,9 +44,7 @@
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 AlmaHub. Tutti i diritti riservati.</p>
-  </footer>
+  <?php include '../template/layout/footer.php'; ?>
 
 </body>
 </html>
