@@ -91,5 +91,6 @@
         </section>
     </main>
     <script src="../js/admin/user-actions.js"></script>
+    <script src="../js/admin/group-messages.js"></script>
 </body>
 </html>
