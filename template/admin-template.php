@@ -73,31 +73,21 @@
 
         <section>
             <h2>Messaggi gruppo</h2>
-            <form method="GET">
+            <div>
                 <label>Seleziona gruppo:</label>
-                <select name="group_id">
+                <select id="groupSelect">
                     <?php foreach ($adminParams['groups'] as $g): ?>
-                        <option value="<?= $g['id_gruppo'] ?>"
-                            <?= ($adminParams['selectedGroupId'] == $g['id_gruppo']) ? 'selected' : '' ?>>
+                        <option value="<?= $g['id_gruppo'] ?>">
                             <?= htmlspecialchars($g['titolo']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <button type="submit">Visualizza</button>
-            </form>
-            <?php if (empty($adminParams['messages'])): ?>
-                <p>Questo gruppo non ha messaggi.</p>
-            <?php else: ?>
-                <ul>
-                    <?php foreach ($adminParams['messages'] as $m): ?>
-                            <li>
-                                <?= $m['data_invio'] ?> -
-                                <?= htmlspecialchars($m['nome'] . ' ' . $m['cognome']) ?><br>
-                                <?= htmlspecialchars($m['corpo_messaggio']) ?>
-                            </li>
-                        <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
+                <button type="button" onclick="loadMessages()">Visualizza</button>
+            </div>
+
+            <div id="messages-container">
+                <p>Seleziona un gruppo per vedere i messaggi</p>
+            </div>
         </section>
     </main>
     <script src="../js/admin/user-actions.js"></script>

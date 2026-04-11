@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'success' => true,
             'action' => 'ban'
         ]);
-        exit;
+        exit();
     }
 
     if (isset($_POST['unban_user'])) {
@@ -32,6 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     echo json_encode(['success' => false]);
+    exit();
+}
+
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'messages') {
+
+    header('Content-Type: application/json');
+
+    $groupId = isset($_GET['group_id']) ? (int)$_GET['group_id'] : 0;
+    $messages = $dbh->getMessagesForAdmin($groupId);
+
+    echo json_encode($messages);
     exit();
 }
 
