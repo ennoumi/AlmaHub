@@ -9,12 +9,30 @@ if(!isAdmin()){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
+
     if (isset($_POST['ban_user'])) {
         $dbh->banUser((int)$_POST['user_id']);
+
+        echo json_encode([
+            'success' => true,
+            'action' => 'ban'
+        ]);
+        exit;
     }
+
     if (isset($_POST['unban_user'])) {
         $dbh->unbanUser((int)$_POST['user_id']);
+
+        echo json_encode([
+            'success' => true,
+            'action' => 'unban'
+        ]);
+        exit();
     }
+
+    echo json_encode(['success' => false]);
+    exit();
 }
 
 $adminParams = [
