@@ -18,11 +18,20 @@ function sendRequest(userId, action) {
     .then(response => response.json())
     .then(data => {
 
-        if (data.success) {
-            console.log("OK", data);
+    if (data.success) {
+        const row = document.getElementById(`user-${userId}`);
+        const stato = row.querySelector('.stato');
+        const azioni = row.querySelector('.azioni');
+        if (data.action === 'ban') {
+            stato.textContent = 'disattivato';
+            azioni.innerHTML = `<button type="button" onclick="unbanUser(${userId})">Riattiva</button>`;
         } else {
-            alert("Errore");
+            stato.textContent = 'attivo';
+            azioni.innerHTML = `<button type="button" onclick="banUser(${userId})">Disattiva</button>`;
         }
+    } else {
+        alert("Errore");
+    }
 
     })
     .catch(error => {
