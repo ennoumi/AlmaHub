@@ -54,21 +54,15 @@
                 </thead>
                 <tbody>
                 <?php foreach ($adminParams['users'] as $u): ?>
-                    <tr>
+                    <tr id="user-<?= $u['id_utente'] ?>">
                         <td><?= htmlspecialchars($u['nome'] . ' ' . $u['cognome']) ?></td>
                         <td><?= htmlspecialchars($u['email']) ?></td>
-                        <td><?= $u['stato'] ?></td>
-                        <td>
+                        <td class="stato"><?= $u['stato'] ?></td>
+                        <td class="azioni">
                             <?php if ($u['stato'] === 'attivo'): ?>
-                                <form method="POST" style="display:inline;">
-                                    <input type="hidden" name="user_id" value="<?= $u['id_utente'] ?>">
-                                    <button name="ban_user">Disattiva</button>
-                                </form>
+                                <button type="button" onclick="banUser(<?= $u['id_utente'] ?>)">Disattiva</button>
                             <?php else: ?>
-                                <form method="POST" style="display:inline;">
-                                    <input type="hidden" name="user_id" value="<?= $u['id_utente'] ?>">
-                                    <button name="unban_user">Riattiva</button>
-                                </form>
+                                <button type="button" onclick="unbanUser(<?= $u['id_utente'] ?>)">Riattiva</button>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -106,5 +100,6 @@
             <?php endif; ?>
         </section>
     </main>
+    <script src="../js/admin/user-actions.js"></script>
 </body>
 </html>
