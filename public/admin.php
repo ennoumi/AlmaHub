@@ -46,6 +46,16 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === 'messages') {
     exit();
 }
 
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'stats') {
+
+    header('Content-Type: application/json');
+
+    $stats = $dbh->getAdminStats();
+
+    echo json_encode($stats);
+    exit();
+}
+
 $adminParams = [
     'stats' => $dbh->getAdminStats(),
     'users' => $dbh->getAllUsers(),

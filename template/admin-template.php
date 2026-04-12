@@ -17,11 +17,11 @@
         <section>
             <h2>Statistiche</h2>
             <ul>
-                <li>Gruppi creati: <?= $adminParams['stats']['totale_gruppi'] ?></li>
-                <li>Studenti registrati: <?= $adminParams['stats']['totale_studenti'] ?></li>
-                <li>Studenti attivi: <?= $adminParams['stats']['studenti_attivi'] ?></li>
-                <li>Studenti disattivati: <?= $adminParams['stats']['studenti_disattivati'] ?></li>
-                <li>Messaggi totali: <?= $adminParams['stats']['totale_messaggi'] ?></li>
+                <li>Gruppi creati: <span id="totale-gruppi"><?php echo $adminParams['stats']['totale_gruppi'] ?></span></li>
+                <li>Studenti registrati: <span id="totale-studenti"><?php echo $adminParams['stats']['totale_studenti'] ?></span></li>
+                <li>Studenti attivi: <span id="studenti-attivi"><?php echo $adminParams['stats']['studenti_attivi'] ?></span></li>
+                <li>Studenti disattivati: <span id="studenti-disattivati"><?php echo $adminParams['stats']['studenti_disattivati'] ?></span></li>
+                <li>Messaggi totali: <span id="totale-messaggi"><?php echo $adminParams['stats']['totale_messaggi'] ?></span></li>
             </ul>
         </section>
 
@@ -92,5 +92,6 @@
     </main>
     <script src="../js/admin/user-actions.js"></script>
     <script src="../js/admin/group-messages.js"></script>
+    <script src="../js/admin/stats.js"></script>
 </body>
 </html>

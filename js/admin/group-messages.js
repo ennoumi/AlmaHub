@@ -28,6 +28,7 @@ function loadMessages() {
             html += "</ul>";
 
             container.innerHTML = html;
+            updateStats();
         })
         .catch(error => {
             console.error(error);
