@@ -55,13 +55,13 @@
         <?php if (!$isSubscribed): ?>
             <form id="iscrizione">
                 <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
-                <button type="submit">PARTECIPA AL GRUPPO</button>
+                <button type="submit" onclick="joinGroup()">PARTECIPA AL GRUPPO</button>
             </form>
         <?php else: ?>
             <p>Sei membro di questo gruppo</p>
             <form id="disiscrizione">
                 <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
-                <button type="submit">ESCI DAL GRUPPO</button>
+                <button type="submit" onclick="leaveGroup()">ESCI DAL GRUPPO</button>
             </form>
         <?php endif; ?>
 
@@ -69,60 +69,8 @@
         <p>Gruppo non trovato.</p>
     <?php endif; ?>
 
-    <script>
-        document.getElementById('iscrizione').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-
-            fetch('process-join.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.risultato === 0) {
-                    alert("Iscrizione avvenuta con successo!");
-                    location.reload(); // Ricarica per aggiornare il numero di iscritti
-                } else if (data.risultato === 1) {
-                    alert("Il gruppo è pieno.");
-                } else if (data.risultato === 2) {
-                    alert("Sei già iscritto a questo gruppo.");
-                } else if (data.risultato === 3) {
-                    alert("Richiesta di iscrizione inviata.");
-                } else {
-                    alert("Errore durante l'iscrizione.");
-                }
-            })
-            .catch(error => alert("Errore di connessione."));
-        });
-    </script>
-
-    <script>
-        document.getElementById('disiscrizione')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Conferma di uscita
-            if (!confirm("Sei sicuro di voler uscire da questo gruppo?")) return;
-
-            const formData = new FormData(this);
-
-            fetch('process-quit.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.risultato) {
-                    alert("Hai abbandonato il gruppo con successo.");
-                    location.reload(); // Ricarica per aggiornamento numero iscritti, eliminazione chat e tasto di iscrizione
-                } else {
-                    alert("Errore durante l'operazione di disiscrizione.");
-                }
-            })
-            .catch(error => alert("Errore di connessione."));
-        });
-    </script>
+    <script src="../js/join-group.js"></script>
+    <script src="../js/leave-group.js"></script>
 
     <h3>Chat di Gruppo</h3>
     <?php if ($isSubscribed): ?>
@@ -144,32 +92,12 @@
             </form>
         </div>
 
+        <script src="../js/chat-box.js"></script>
+
+        // Attivazione manuale dello script senza onclick
+        // per permettere l'invio del messaggio tramite pressione del tasto invio
         <script>
-            const nomeUtenteLoggato = "<?php echo $_SESSION['utente']['nome'] . ' ' . $_SESSION['utente']['cognome']; ?>";
-            const chatBox = document.getElementById('chat-box');
-            const chatForm = document.getElementById('chat-form');
-
-            chatBox.scrollTop = chatBox.scrollHeight; // Scorre in basso la chat
-
-            chatForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-
-                fetch('process-chat.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        const p = document.createElement('p');
-                        p.innerHTML = `<strong>${nomeUtenteLoggato}:</strong> ${formData.get('messaggio')}`;
-                        chatBox.appendChild(p); // Aggiunge il messaggio alla chat
-                        this.reset(); // Svuota il form del messaggio
-                        chatBox.scrollTop = chatBox.scrollHeight; // Scorre in basso la chat
-                    }
-                });
-            });
+            chatBox("<?php echo $_SESSION['utente']['nome'] . ' ' . $_SESSION['utente']['cognome']; ?>");
         </script>
 
         <?php else: ?>

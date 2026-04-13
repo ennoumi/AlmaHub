@@ -9,11 +9,11 @@ if (!isset($_SESSION['utente'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id_gruppo"])) {
-    $idGruppo = (int)$_POST["id_gruppo"];
-    $idUtente = $_SESSION['utente']['id_utente'];
-    $accept = (bool)$_POST['azione'];
+    $idGruppo = (int)$_POST['id_gruppo'];
+    $idUtente = $_POST['id_utente'];
+    $azione = $_POST['azione'];
 
-    $res = $dbh->manageRequest($idUtente, $idGruppo, $accept);
+    $res = $dbh->manageRequest($idUtente, $idGruppo, $azione);
 
     echo json_encode([ 'risultato' =>($res ? 0 : -1) ]);
     exit();

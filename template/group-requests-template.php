@@ -9,58 +9,39 @@
     <?php include 'layout/header.php'; ?>
     <h1><?php echo "Richieste in corso:"?></h1>
 
+        <?php if (!empty($dashboardParams['pending'])): ?>
         <h2>Richieste in entrata:</h2>
         <ul>
-            <?php foreach($dashboardParams["pending"] as $req):?>
+            <?php foreach($dashboardParams['pending'] as $req):?>
             <li>
-                <p><?php echo $req["tipo"]?></p>
-                <p><?php echo $req["titolo"];?></p>
-                <p><a href="group-details.php?id=<?php echo $req['id_gruppo']; ?>">Visualizza Gruppo</a></p>
-                <button type="button" onclick="handleRequest(<?php echo $req['id_utente']; ?>, <?php echo $req['id_gruppo']; ?>, 'true')">
+                <p><a href="group-details.php?id=<?php echo $req['id_gruppo']; ?>"><?php echo $req["titolo"];?></a></p>
+                <a href="profile.php?user=<?php echo $req['id_utente'];?>"><?php echo $req["nome"] . ' ' . $req["cognome"];?></a>
+                <p>Data adesione: <?php echo $req["data_adesione"];?></p>
+                <button type="button" onclick="handleRequest(<?php echo $req['id_utente']; ?>, <?php echo $req['id_gruppo']; ?>, 'accetta')">
                     ACCETTA
                 </button>
-                <button type="button" onclick="handleRequest(<?php echo $req['id_utente']; ?>, <?php echo $req['id_gruppo']; ?>, 'false')">
+                <button type="button" onclick="handleRequest(<?php echo $req['id_utente']; ?>, <?php echo $req['id_gruppo']; ?>, 'rifiuta')">
                     RIFIUTA
                 </button>
             </li>
             <?php endforeach;?>
         </ul>
+        <?php endif; ?>
 
+        <?php if (!empty($dashboardParams['sent'])): ?>
         <h2>Richieste in uscita:</h2>
         <ul>
-            <?php foreach($dashboardParams["sent"] as $req):?>
+            <?php foreach($dashboardParams['sent'] as $req):?>
             <li>
-                <p><?php echo $req["tipo"]?></p>
-                <p><?php echo $req["titolo"];?></p>
-                <p><a href="group-details.php?id=<?php echo $req['id_gruppo']; ?>">Visualizza Gruppo</a></p>
+                <p><a href="group-details.php?id=<?php echo $req['id_gruppo']; ?>"><?php echo $req["titolo"];?></a></p>
+                <p>Data adesione: <?php echo $req["data_adesione"];?></p>
             </li>
             <?php endforeach;?>
         </ul>
+        <?php endif;?>
 
-        <script>
-            function handleRequest(idUtente, idGruppo, azione) {
+        <script src="../js/group-request-handler.js"></script>
 
-                const formData = new FormData();
-                formData.append('id_utente', idUtente);
-                formData.append('id_gruppo', idGruppo);
-                formData.append('azione', azione);
-
-                fetch('process-requests.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.risultato === 0) {
-                        location.reload(); // Ricarica la pagina per eliminare la richiesta
-                    } else if(data.risultato === 100){
-                        alert("Login richiesto");
-                    } else {
-                        alert("Errore");
-                    }
-                });
-            }
-        </script>
         <?php include 'layout/footer.php'; ?>
     </body>
 </html>
