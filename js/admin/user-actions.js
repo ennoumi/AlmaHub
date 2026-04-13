@@ -29,6 +29,7 @@ function sendRequest(userId, action) {
             stato.textContent = 'attivo';
             azioni.innerHTML = `<button type="button" onclick="banUser(${userId})">Disattiva</button>`;
         }
+        updateStats();
     } else {
         alert("Errore");
     }
