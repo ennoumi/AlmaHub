@@ -264,7 +264,7 @@ class DatabaseHelper {
     }
 
     // Iscrizione al gruppo, verifica se il gruppo esiste, se è pieno o se si è già iscritti
-    public function joinGroup(int $idUtente, int $idGruppo, string $ruolo='Membro') {
+    public function joinGroup(int $idUtente, int $idGruppo, string $ruolo="Membro") {
     $details = $this->getGroupDetails($idGruppo);
     if (empty($details)) {
         return -1; // Gruppo inesistente
@@ -276,7 +276,7 @@ class DatabaseHelper {
 
     try {
         if($ruolo == "Fondatore") {
-            $statoIniziale = "Confermato";
+            $statoIniziale = "confermato";
         } else {
             $tipologia = $details['tipo'];
             $statoIniziale = ($tipologia == "Elaborato") ? "in_attesa" : "confermato"; //Se il gruppo è di elaborato inizialmente lo stato di iscrizione è "in attesa", altrimenti "confermato"
@@ -287,7 +287,7 @@ class DatabaseHelper {
         
         if ($stmt->execute()) {
             $stmt->close();
-            return $tipologia ? 3 : 0; // Se il gruppo è di elaborato restituisce 3 (in attesa), altrimenti 0 (confermato)
+            return $statoIniziale == "confermato" ? 0 : 3; // Restituisce lo stato dell'iscrizione
         }
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() === 1062) {
@@ -432,7 +432,7 @@ class DatabaseHelper {
     }
 
     public function isUserInGroup(int $idUtente, $idGruppo) {
-        $query = "SELECT * FROM iscrizioni WHERE id_utente = ? AND id_gruppo = ?"; 
+        $query = "SELECT * FROM iscrizioni WHERE id_utente = ? AND id_gruppo = ? AND stato='confermato'"; 
         
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $idUtente, $idGruppo);
@@ -475,8 +475,8 @@ class DatabaseHelper {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function manageRequest(int $idUtente, int $idGruppo, bool $accetta) {
-        if ($accetta) {
+    public function manageRequest(int $idUtente, int $idGruppo, string $azione) {
+        if ($azione == 'accetta') {
             $query = "UPDATE iscrizioni SET stato = 'confermato' 
                     WHERE id_utente = ? AND id_gruppo = ? AND stato = 'in_attesa'";
         } else {
