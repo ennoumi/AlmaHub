@@ -335,6 +335,17 @@ class DatabaseHelper {
         return $groupDetails->fetch_assoc() ?? [];
     }
 
+    public function findGroups(string $query) {
+        $query = "%$query%"; // I % per considerare qualsiasi carattere agli estremi del termine cercato
+
+        $stmt = $this->db->prepare("SELECT * FROM gruppi WHERE titolo LIKE ?");
+        $stmt->bind_param("s", $query);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function countGroupParticipants(int $idGruppo) {
         $stmt = $this->db->prepare("SELECT COUNT(*) as totale FROM iscrizioni WHERE id_gruppo = ? AND stato = 'confermato'");
         $stmt->bind_param("i", $idGruppo);

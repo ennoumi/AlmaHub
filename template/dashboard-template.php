@@ -26,7 +26,8 @@
         </ul>
 
         <h2>Gruppi disponibili</h2>
-        <ul>
+        <input type="text" id="group-search" placeholder="Cerca gruppi per nome o tipo..." autocomplete="off">
+        <ul id="available-groups-list">
             <?php foreach($dashboardParams["availableGroups"] as $gruppo):?>
             <li>
                 <p><?php echo $gruppo["tipo"]?></p>
@@ -37,5 +38,6 @@
         </ul>
     </main>
     <?php include 'layout/footer.php'; ?>
+    <script src="../js/groups/search-handler.js"></script>
     </body>
 </html>
