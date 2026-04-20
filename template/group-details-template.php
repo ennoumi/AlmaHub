@@ -69,8 +69,8 @@
         <p>Gruppo non trovato.</p>
     <?php endif; ?>
 
-    <script src="../js/join-group.js"></script>
-    <script src="../js/leave-group.js"></script>
+    <script src="../js/groups/join-group.js"></script>
+    <script src="../js/groups/leave-group.js"></script>
 
     <h3>Chat di Gruppo</h3>
     <?php if ($isSubscribed): ?>
@@ -92,7 +92,7 @@
             </form>
         </div>
 
-        <script src="../js/chat-box.js"></script>
+        <script src="../js/groups/chat-box.js"></script>
 
         // Attivazione manuale dello script senza onclick
         // per permettere l'invio del messaggio tramite pressione del tasto invio

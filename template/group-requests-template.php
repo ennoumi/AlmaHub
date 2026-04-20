@@ -40,7 +40,7 @@
         </ul>
         <?php endif;?>
 
-        <script src="../js/group-request-handler.js"></script>
+        <script src="../js/groups/group-request-handler.js"></script>
 
         <?php include 'layout/footer.php'; ?>
     </body>
