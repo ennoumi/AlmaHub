@@ -26,7 +26,7 @@
         </ul>
 
         <h2>Gruppi disponibili</h2>
-        <input type="text" id="group-search" placeholder="Cerca gruppi per nome o tipo..." autocomplete="off">
+        <input type="text" id="group-search" placeholder="Cerca gruppi per nome..." autocomplete="off">
         <ul id="available-groups-list">
             <?php foreach($dashboardParams["availableGroups"] as $gruppo):?>
             <li>
