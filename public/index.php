@@ -4,44 +4,49 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AlmaHub - Benvenuto</title>
+  <link rel="stylesheet" href="../css/index.css">
 </head>
+
 <body>
+  <main class="container">
 
-  <?php include '../template/layout/header.php'; ?>
+    <section class="intro">
+      <h1 class="logo-text">ALMAHUB</h1>
 
-  <main>
-    <section>
-      <h2>Il tuo successo accademico inizia qui.</h2>
-
-      <p>
+      <p class="intro-text">
         Unisciti a gruppi di studio e collabora ai tuoi progetti universitari
         in modo semplice e accessibile.
       </p>
-
-      <figure>
-        <!-- qui mettiamo un'immagine -->
-        <img src="#"/>
-      </figure>
+      
+      <div class="buttons">
+        <a href="login.php" class="btn-login">Accedi</a>
+        <a href="register.php" class="btn-register">Registrati</a>
+      </div>
     </section>
 
-    <section>
+    <section class="features">
       <h2>Perché scegliere AlmaHub?</h2>
 
-      <article>
-        <h3>Gruppi di Studio</h3>
-        <p>Connettiti con i colleghi del tuo corso in pochi tap.</p>
-      </article>
+      <div class="features-container">
 
-      <article>
-        <h3>Progetti comuni</h3>
-        <p>Gestisci documenti e scadenze dei tuoi lavori di gruppo.</p>
-      </article>
+        <article class="feature-card">
+          <h3>Gruppi di Studio</h3>
+          <p>Connettiti con i colleghi del tuo corso in pochi tap.</p>
+        </article>
 
-      <article>
-        <h3>Design Inclusivo</h3>
-        <p>Interfaccia ad alto contrasto ottimizzata per l’accessibilità.</p>
-      </article>
+        <article class="feature-card">
+          <h3>Progetti comuni</h3>
+          <p>Gestisci documenti e scadenze dei tuoi lavori di gruppo.</p>
+        </article>
+
+        <article class="feature-card">
+          <h3>Design Inclusivo</h3>
+          <p>Interfaccia ad alto contrasto ottimizzata per l’accessibilità.</p>
+        </article>
+
+      </div>
     </section>
+
   </main>
 
   <?php include '../template/layout/footer.php'; ?>
