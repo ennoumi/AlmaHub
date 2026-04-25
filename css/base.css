@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+:root { /*Per le variabili globali*/
+    --primary-color: #007BFF;
+    --primary-gradient: linear-gradient(90deg, #007BFF, #00C6FF);
+}
+
+.gradient-text {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*PULSANTI*/
+.btn { 
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}

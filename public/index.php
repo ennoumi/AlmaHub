@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AlmaHub - Benvenuto</title>
+  <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/index.css">
 </head>
 
@@ -11,7 +12,7 @@
   <main class="container">
 
     <section class="intro">
-      <h1 class="logo-text">ALMAHUB</h1>
+    <h1 class="logo-text gradient-text">ALMAHUB</h1>
 
       <p class="intro-text">
         Unisciti a gruppi di studio e collabora ai tuoi progetti universitari
@@ -19,8 +20,8 @@
       </p>
       
       <div class="buttons">
-        <a href="login.php" class="btn-login">Accedi</a>
-        <a href="register.php" class="btn-register">Registrati</a>
+        <a href="login.php" class="btn btn-primary">Accedi</a>
+        <a href="register.php" class="btn btn-secondary">Registrati</a>
       </div>
     </section>
 
