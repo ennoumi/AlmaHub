@@ -24,7 +24,6 @@ body {
     cursor: pointer;
 }
 
-
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
@@ -41,4 +40,9 @@ body {
 .btn-secondary:hover {
     background-color: var(--primary-color);
     color: white;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
 }
