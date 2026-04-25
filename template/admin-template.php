@@ -10,7 +10,7 @@
         <header>
             <h1>Gestione della piattaforma</h1>
             <p>
-                <a href="../public/dashboard.php">Dashboard</a> | <a href="../public/logout.php">Logout</a>
+                <a href="../public/logout.php">Logout</a>
             </p>
         </header>
 
