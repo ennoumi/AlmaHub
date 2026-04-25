@@ -4,7 +4,6 @@
     <title>AlmaHub - Login</title>
 </head>
 <body>
-    <?php include 'layout/header.php'; ?>
     <main>
         <form action="login.php" method="POST">
             <h1>Accedi ad AlmaHub</h1>

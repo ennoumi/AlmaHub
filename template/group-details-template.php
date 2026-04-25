@@ -29,7 +29,7 @@
 
 <?php include 'layout/header.php'; ?>
 
-    <p><a href="dashboard.php">← Torna indietro</a></p>
+    <p><a href="admin.php">&larr; Torna alla Dashboard</a></p>
 
     <?php if(!empty($templateParams["gruppo"])): ?>
         
