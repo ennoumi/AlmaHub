@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlmaHub - Login</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <main>
-        <form action="login.php" method="POST">
-            <h1>Accedi ad AlmaHub</h1>
+    <main class="login-container">
+        <form action="login.php" method="POST" class="login-box">
+            <h1 class="gradient-text">Accedi ad AlmaHub</h1>
 
             <?php if (!empty($templateParams["errore"])): ?>
-                <p style="color: red;"><?php echo $templateParams["errore"]; ?></p>
+                <p class="error"><?php echo $templateParams["errore"]; ?></p>
             <?php endif; ?>
 
             <label for="email">Email:</label>
@@ -18,10 +21,11 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Accedi</button>
+            <button type="submit" class="btn btn-primary">Accedi</button>
+                    <p class="register-link">Non hai un account? <a href="register.php">Registrati</a></p>
+
         </form>
-        <p>Non hai un account? <a href="register.php">Registrati</a></p>
     </main>
-    <?php include 'layout/footer.php'; ?>
+    <?php include '../template/layout/footer.php'; ?>
 </body>
 </html>
