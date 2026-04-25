@@ -36,7 +36,8 @@
                         Creatore: <?= htmlspecialchars($g['creatore']) ?><br>
                         Partecipanti: <?= $g['partecipanti'] ?><br>
                         Messaggi inviati: <?= $g['messaggi'] ?><br>
-                    </li>
+                        <a href="group-details-admin.php?id=<?= $g['id_gruppo'] ?>">Visualizza dettagli</a>             
+                   </li>
                 <?php endforeach; ?>
             </ul>
         </section>

@@ -319,8 +319,11 @@ class DatabaseHelper {
     }
 
     public function getGroupDetails(int $idGruppo) {
-        $stmt = $this->db->prepare("SELECT id_gruppo, titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, data_creazione, membri_max
-                                    FROM gruppi WHERE id_gruppo = ?");
+        $stmt = $this->db->prepare("SELECT id_gruppo, titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, data_creazione, membri_max,
+                    CONCAT(u.nome, ' ', u.cognome) AS creatore
+                    FROM gruppi g
+                    LEFT JOIN utenti u ON g.id_creatore = u.id_utente
+                    WHERE id_gruppo = ?");
         
         if (!$stmt) {
                 return false;
