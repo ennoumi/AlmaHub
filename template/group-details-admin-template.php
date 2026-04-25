@@ -9,7 +9,7 @@
 <main>
     <header>
         <h1><?php echo $templateParams['group']['titolo']; ?></h1>
-        <p><a href="admin.php">&larr; Torna indietro</a> | <a href="../public/logout.php">Logout</a></p>
+        <p><a href="admin.php">&larr; Torna alla Dashboard Admin</a></p>
         <p>Corso: <?php echo $templateParams['group']['corso']; ?></p>
         <p>Tipo: <?php echo $templateParams['group']['tipo']; ?></p>
         <p>Creatore: <?php echo isset($templateParams['group']['creatore']) ? $templateParams['group']['creatore'] : 'N/A'; ?></p>
@@ -49,8 +49,6 @@
             <p>Nessun messaggio inviato.</p>
         <?php endif; ?>
     </section>
-
-    <p><a href="admin.php">Torna alla Dashboard Admin</a></p>
 </main>
 </body>
 </html>
