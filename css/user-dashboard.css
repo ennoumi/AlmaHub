@@ -82,3 +82,10 @@ h2 {
     border-radius: 10px;
     border: 1px solid #ccc;
 }
+
+@media (min-width: 768px) {
+    .feature-card {
+        width: 250px;
+        max-width: none;
+    }
+}
