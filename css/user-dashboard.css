@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e6f0ff, #cce0ff);
+}
+
+.dashboard { /*Per il main*/
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.welcome {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.btn-create {
+    display: inline-block;
+    margin-bottom: 40px;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: white;
+    transition: 0.2s;
+}
+
+.btn-create:hover {
+    background-color: #0056b3;
+}
+
+h2 {
+    margin: 40px 0 20px;
+    font-size: 1.8rem;
+}
+
+.group-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.feature-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover { /*cosi trasla verso l’alto*/
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    margin: 6px 0;
+    color: #333;
+}
+
+.feature-card a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+#group-search {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}

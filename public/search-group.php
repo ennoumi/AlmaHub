@@ -10,7 +10,7 @@ if (empty($gruppi)) {
 } else {
     foreach ($gruppi as $gruppo) {
         ?>
-        <li>
+        <li class="feature-card">
             <p><?php echo $gruppo["tipo"]; ?></p>
             <p><?php echo $gruppo["titolo"]; ?></p>
             <p><a href="group-details.php?id=<?php echo $gruppo['id_gruppo']; ?>">Visualizza dettagli</a></p>
