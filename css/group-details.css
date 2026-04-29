@@ -1,0 +1,150 @@
+html, body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e6f0ff, #cce0ff);
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.group-details, .chat-container {
+    margin: 10px auto;
+    width: 95%;
+    padding: 15px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.chat-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.group-details .tipo {
+    display: inline-block;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-color: #006ee4;
+    border-radius: 5px;
+}
+
+.course, h2 {
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin-bottom: 15px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.members {
+    color: #006ee4;
+    text-decoration: none;
+}
+.members:visited {
+    color: #006ee4;
+}
+
+.group-details ul {
+    list-style-type: none;
+}
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f900;
+}
+
+.chat-box p {
+    margin: 5px 0;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.chat-box strong {
+    color: #006ee4;
+}
+
+.message {
+    display: flex;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.message .message-field{
+    width: 75%;
+    margin-right: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.message .send-message{
+    width: 25%;
+    padding: 0;
+    text-align: center;
+}
+
+.leave-group {
+    display: block;
+    width: 95%;
+    margin: 10px auto 15px auto;
+    background-color: rgb(255, 56, 56);
+    border-color: rgba(255, 47, 47, 0);
+
+}
+
+.join-group {
+    display: block;
+    width: 95%;
+    margin: 10px auto 15px auto;
+    background-color: rgb(45, 164, 29);
+    border-color: rgba(255, 47, 47, 0);
+}
+
+@media screen and (min-width: 768px) {
+    .group-details, .chat-container {
+        margin: 15px auto 10px auto;
+        width: 90%;
+        padding: 25px;
+    }
+
+    .message .message-field{
+        width: 80%;
+    }
+
+    .message .send-message {
+        width: 20%;
+    }
+
+    .join-group, .leave-group {
+        width: 90%;
+    }
+
+    .join-group:hover {
+        color: white;
+        background-color: rgb(36, 135, 23);
+    }
+
+    .leave-group:hover {
+        color: white;
+        background-color: rgb(224, 52, 52);
+    }
+}
