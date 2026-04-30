@@ -1,0 +1,112 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e6f0ff, #cce0ff);
+    min-height: 100vh;
+}
+
+.group-members-body {
+    display: inline;
+    flex: 1;
+    margin: 10px auto;
+    width: 95%;
+    padding: 15px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.dashboard-link {
+    margin-bottom: 10px;
+}
+
+.dashboard-link a {
+    color: #0059b8;
+    text-decoration: none;
+}
+
+hr {
+    margin-bottom: 5px;
+}
+
+.group-members-body ul {
+    list-style: none;
+    font-size: 17px;
+}
+
+.member-separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+.member-type {
+    display: inline-block;
+    padding: 1px;
+    margin-bottom: 3px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.Fondatore {
+    border-color: #ffd32583;
+    background-color: #ffd32583;
+}
+
+.Membro {
+    border-color: #56a8ff83;
+    background-color: #56a8ff83;
+}
+
+.name {
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+.profile-link {
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px 20px 5px 20px;
+    margin-top: 3px;
+}
+
+.profile-link a {
+    color: #006ee4;
+    text-decoration: none;
+    padding-right: 5px;
+}
+
+.profile-link a:hover {
+    color: white;
+}
+
+
+@media screen and (min-width: 768px) {
+    .group-members-body {
+        width: 80%;
+        max-width: 1000px;
+        padding: 35px;
+        margin: 40px auto;
+    }
+
+    .group-members-body ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    hr {
+        margin-bottom: 15px;
+    }
+
+    .name {
+        font-size: 1.2rem;
+    }
+
+    .profile-link {
+        border-width: 1px;
+        border-radius: 5px;
+    }
+}
