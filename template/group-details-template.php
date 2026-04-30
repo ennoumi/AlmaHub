@@ -5,14 +5,12 @@
     <title>Dettagli Gruppo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/group-details.css">
 </head>
 <body>
 
 <?php include 'layout/header.php'; ?>
-
-    <p><a href="admin.php">&larr; Torna alla Dashboard</a></p>
-
     <?php if(!empty($templateParams["gruppo"])): ?>
 
         <div class="group-details">
@@ -22,7 +20,7 @@
 
             <ul>
                 <li><a class="members" href="group-members.php?id=<?php echo $templateParams["gruppo"]["id_gruppo"]; ?>">Partecipanti: <?php echo $templateParams["gruppo"]["numPartecipanti"]; ?> / <?php echo $templateParams["gruppo"]["membri_max"]; ?></a></li>
-                <li>Giorni e orario: <?php echo $templateParams["gruppo"]["data_creazione"]; ?></li>
+                <li>Giorni e orario: <?php echo $templateParams["gruppo"]["orario_incontro"]; ?></li>
                 <li>Luogo: <?php echo $templateParams["gruppo"]["luogo_incontro"]; ?></li>
             </ul>
 

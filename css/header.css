@@ -1,0 +1,93 @@
+.main-header {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    color: #006ee4;
+    text-decoration: none;
+}
+
+.dashboard-link {
+    margin-right: 3px;
+}
+
+.profile-link {
+    margin-right: 3px;
+}
+
+.profile-link, .dashboard-link, .requests-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.desktop-links {
+    display: none;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.bar {
+    width: 20px;
+    height: 2px;
+    background: #333;
+}
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid #eee;
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-menu a {
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.logout-btn {
+    color: #d93025;
+    font-weight: bold; 
+    text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
+    .desktop-links {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .desktop-nav a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .menu-toggle, .mobile-menu {
+        display: none;
+    }
+}

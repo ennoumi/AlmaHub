@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Admin</title>
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
+    <?php include 'layout/header.php'; ?>
     <main>
-        <header>
-            <h1>Gestione della piattaforma</h1>
-            <p>
-                <a href="../public/logout.php">Logout</a>
-            </p>
-        </header>
-
         <section>
             <h2>Statistiche</h2>
             <ul>

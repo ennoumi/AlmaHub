@@ -4,6 +4,7 @@
     <title>Crea Gruppo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/create-group.css">
 </head>
 <body>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/user-dashboard.css">
 </head>
 <body>

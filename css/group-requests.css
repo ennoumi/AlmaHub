@@ -1,0 +1,99 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e6f0ff, #cce0ff);
+    min-height: 100vh;
+}
+
+.group-requests-body {
+    display: block;
+    flex: 1;
+    margin: 10px auto;
+    width: 95%;
+    padding: 15px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.requests-section-title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.group-requests-body ul {
+    list-style: none;
+    font-size: 17px;
+    padding: 0;
+}
+
+.request-separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+.request-name {
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+.requests-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.request-action {
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px 20px;
+    margin-top: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.accetta {
+    border-color: #28a745;
+    color: #28a745;
+}
+.accetta:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.rifiuta {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+.rifiuta:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+@media screen and (min-width: 768px) {
+    .group-requests-body {
+        width: 80%;
+        max-width: 1000px;
+        padding: 35px;
+        margin: 40px auto;
+    }
+
+    .group-requests-body ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .request-name {
+        font-size: 1.2rem;
+    }
+}
