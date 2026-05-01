@@ -7,7 +7,7 @@ body {
 }
 
 .group-members-body {
-    display: inline;
+    display: block;
     flex: 1;
     margin: 10px auto;
     width: 95%;
@@ -15,10 +15,6 @@ body {
     border-radius: 15px;
     background: white;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.dashboard-link {
-    margin-bottom: 10px;
 }
 
 .dashboard-link a {
@@ -64,20 +60,20 @@ hr {
     font-weight: bold;
 }
 
-.profile-link {
+.profile-page-link {
     display: inline-block;
     font-size: 16px;
     padding: 5px 20px 5px 20px;
     margin-top: 3px;
 }
 
-.profile-link a {
+.profile-page-link a {
     color: #006ee4;
     text-decoration: none;
     padding-right: 5px;
 }
 
-.profile-link a:hover {
+.profile-page-link a:hover {
     color: white;
 }
 
@@ -105,7 +101,7 @@ hr {
         font-size: 1.2rem;
     }
 
-    .profile-link {
+    .profile-page-link {
         border-width: 1px;
         border-radius: 5px;
     }

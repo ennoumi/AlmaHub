@@ -21,7 +21,7 @@
                 <p class="member-type <?php echo $m["ruolo"];?>"><?php echo $m["ruolo"];?></p>
                 <p class="name"><?php echo $m["nome"] . ' ' . $m["cognome"];?></p>
                 <p><?php echo $m["email"];?></p>
-                <p class="profile-link btn btn-secondary"><a href="profile.php?user=<?php echo $m['id_utente'];?>">Profilo</a></p>
+                <p class="profile-page-link btn btn-secondary"><a href="profile.php?user=<?php echo $m['id_utente'];?>">Profilo</a></p>
                 <hr class="member-separator">
             </li>
             <?php endforeach;?>
