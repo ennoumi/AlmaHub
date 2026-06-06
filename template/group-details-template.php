@@ -34,7 +34,7 @@
             $isSubscribed = $dbh->isUserInGroup($_SESSION['utente']['id_utente'], $idGruppo);
         ?>
 
-        <?php if (!$isSubscribed): ?>
+        <?php if (!$isSubscribed && !isAdmin()): ?>
             <form id="iscrizione">
                 <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
                 <button type="submit" class="btn btn-primary join-group" onclick="joinGroup()">PARTECIPA AL GRUPPO</button>
@@ -48,7 +48,7 @@
     <script src="../js/groups/join-group.js"></script>
     <script src="../js/groups/leave-group.js"></script>
 
-    <?php if ($isSubscribed): ?>
+    <?php if ($isSubscribed || isAdmin()): ?>
         <div class="chat-container">
             <h3>Chat di Gruppo</h3>
             <div id="chat-box" class="chat-box">
@@ -61,14 +61,15 @@
                 <?php endforeach; ?>
             </div>
 
-            <form id="chat-form" class="chat-form">
-                <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
-                <div class="message">
-                    <input type="text" name="messaggio" class="message-field" placeholder="Scrivi un messaggio..." required>
-                    <button type="submit" class="btn btn-secondary send-message">Invia</button>
-                </div>
-                
-            </form>
+            <?php if (!isAdmin()): ?>
+                <form id="chat-form" class="chat-form">
+                    <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
+                    <div class="message">
+                        <input type="text" name="messaggio" class="message-field" placeholder="Scrivi un messaggio..." required>
+                        <button type="submit" class="btn btn-secondary send-message">Invia</button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </div>
 
         <script src="../js/groups/chat-box.js"></script>
@@ -77,10 +78,12 @@
             chatBox("<?php echo $_SESSION['utente']['nome'] . ' ' . $_SESSION['utente']['cognome']; ?>");
         </script>
 
-        <form id="disiscrizione">
-            <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
-            <button type="submit" class="btn btn-primary leave-group" onclick="leaveGroup()">ESCI DAL GRUPPO</button>
-        </form>
+        <?php if (!isAdmin()): ?>
+            <form id="disiscrizione">
+                <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
+                <button type="submit" class="btn btn-primary leave-group" onclick="leaveGroup()">ESCI DAL GRUPPO</button>
+            </form>
+        <?php endif; ?>
     <?php endif; ?>
         
     <?php include 'layout/footer.php'; ?>
