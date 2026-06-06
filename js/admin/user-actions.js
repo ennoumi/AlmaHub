@@ -24,10 +24,18 @@ function sendRequest(userId, action) {
         const azioni = row.querySelector('.azioni');
         if (data.action === 'ban') {
             stato.textContent = 'disattivato';
-            azioni.innerHTML = `<button type="button" onclick="unbanUser(${userId})">Riattiva</button>`;
+            azioni.innerHTML = `<button class="unban btn btn-primary" type="button" onclick="unbanUser(${userId})">Riattiva</button>`;
+
+            const btn = azioni.querySelector('button');
+            btn.style.padding = '15px 20px 15px 20px';
+            btn.style.borderRadius = '5px';
         } else {
             stato.textContent = 'attivo';
-            azioni.innerHTML = `<button type="button" onclick="banUser(${userId})">Disattiva</button>`;
+            azioni.innerHTML = `<button class="ban btn btn-primary" type="button" onclick="banUser(${userId})">Disattiva</button>`;
+
+            const btn = azioni.querySelector('button');
+            btn.style.padding = '15px 20px 15px 20px';
+            btn.style.borderRadius = '5px';
         }
         updateStats();
     } else {
