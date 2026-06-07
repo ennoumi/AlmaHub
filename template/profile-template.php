@@ -67,10 +67,12 @@
                 </div>
             </section>
         <?php else: ?>
-            <h2>Dati profilo</h2>
-            <p><strong>Nome:</strong> <?php echo htmlspecialchars($user['nome']); ?></p>
-            <p><strong>Cognome:</strong> <?php echo htmlspecialchars($user['cognome']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+            <div class="profile-info">
+                <h2>Dati profilo</h2>
+                <p><strong>Nome:</strong> <?php echo htmlspecialchars($user['nome']); ?></p>
+                <p><strong>Cognome:</strong> <?php echo htmlspecialchars($user['cognome']); ?></p>
+                <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+            </div>
         <?php endif; ?>
     </main>
     <?php include 'layout/footer.php'; ?>
