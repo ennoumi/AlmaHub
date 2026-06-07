@@ -17,34 +17,34 @@ $isAdmin = ($_SESSION['utente']['ruolo'] === 'admin');
 
         <div class="nav-right">
             <div class="desktop-links">
-                <?php if (!$isAdmin): ?>
-                    <a class="profile-link" href="/AlmaHub/public/profile.php" class="user-name">
-                        <?php echo $_SESSION['utente']['nome'] . ' ' . $_SESSION['utente']['cognome']; ?>
-                    </a>
-                <?php endif; ?>
+                <a class="profile-link" href="/AlmaHub/public/profile.php" class="user-name">
+                    <?php echo $_SESSION['utente']['nome'] . ' ' . $_SESSION['utente']['cognome']; ?>
+                </a>
                 
                 <a href="/AlmaHub/public/logout.php" class="logout-btn">Logout</a>
             </div>
 
-            <?php if (!$isAdmin): ?>
-                <button class="menu-toggle" id="btn-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            <?php endif; ?>
+            <button class="menu-toggle" id="btn-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
-    <?php if (!$isAdmin): ?>
     <div class="mobile-menu" id="mobile-nav">
-        <a href="/AlmaHub/public/dashboard.php">Dashboard</a>
-        <a href="/AlmaHub/public/group-requests.php">Richieste di Partecipazione</a>
+        <?php if ($isAdmin): ?>
+            <a href="/AlmaHub/public/admin.php">Dashboard Admin</a>
+        <?php else: ?>
+            <a href="/AlmaHub/public/dashboard.php">Dashboard</a>
+        <?php endif; ?>
+        <?php if (!$isAdmin): ?>
+            <a href="/AlmaHub/public/group-requests.php">Richieste di Partecipazione</a>
+        <?php endif; ?>
         <a href="/AlmaHub/public/profile.php">Profilo</a>
         <hr>
         <a href="/AlmaHub/public/logout.php">Logout</a>
     </div>
-    <?php endif; ?>
 </header>
 
 <script>
@@ -52,7 +52,7 @@ $isAdmin = ($_SESSION['utente']['ruolo'] === 'admin');
     const nav = document.getElementById('mobile-nav');
 
     if (btn && nav) {
-        btn.onclick = () => {
+        btn.onclick = function() {
             nav.classList.toggle('active');
         };
     };
