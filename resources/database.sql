@@ -46,20 +46,6 @@ CREATE TABLE iscrizioni (
   FOREIGN KEY (id_gruppo) REFERENCES gruppi(id_gruppo) ON DELETE CASCADE
 );
 
--- TABELLA REGISTRO ATTIVITÀ
-CREATE TABLE registro_attivita (
-  id_log INT AUTO_INCREMENT PRIMARY KEY,
-  id_utente INT DEFAULT NULL,
-  azione VARCHAR(50) NOT NULL,
-  tabella_riferimento VARCHAR(50) DEFAULT NULL,
-  id_riferimento INT DEFAULT NULL,
-  dettagli TEXT DEFAULT NULL,
-  ip_address VARCHAR(45) DEFAULT NULL,
-  user_agent VARCHAR(255) DEFAULT NULL,
-  data_evento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_utente) REFERENCES utenti(id_utente) ON DELETE SET NULL
-);
-
 -- TABELLA MESSAGGI (CHAT)
 CREATE TABLE messaggi (
   id_messaggio INT AUTO_INCREMENT PRIMARY KEY,
