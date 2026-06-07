@@ -1,0 +1,221 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e6f0ff, #cce0ff);
+    min-height: 100vh;
+}
+
+.statistiche, .gruppi, .studenti, .messaggi {
+    background-color: white;
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.statistiche{
+    margin-top: 15px;
+}
+
+.gruppi a{
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #007BFF;
+    padding-bottom: 5px;
+}
+
+.gruppi a:hover{
+    color: #007BFF;
+}
+
+.gruppi a:visited{
+    color: #007BFF;
+}
+
+h1 {
+    margin-left: 15px;
+    margin-bottom: 5px;
+    color:black
+}
+
+h2 {
+    margin-bottom: 3px;
+}
+
+ul {
+    list-style: none;
+}
+
+.statistiche ul li, .gruppi ul li {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.selezione-gruppo {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.selezione-gruppo label, .selezione-gruppo select {
+    margin-bottom: 5px;
+}
+
+.selezione-gruppo select {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.studenti ul li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.attivo {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.disattivato {
+    font-weight: bold;
+    color: #ff2b2be2;
+}
+
+.btn {
+    padding: 15px 20px 15px 20px;
+    border-radius: 5px;
+}
+
+.ban {
+    background-color: rgba(255, 39, 39, 0.753);
+}
+
+.visualizza-messaggi {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    
+    h1 {
+        margin-top: 5px;
+        font-size: 1.5rem;
+    }
+
+    .statistiche {
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .statistiche h2 {
+        display: none;
+    }
+
+    .statistiche ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 0;
+    }
+
+    .statistiche ul li {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .statistiche ul li span {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-left: 5px;
+        margin-bottom: 5px;
+    }
+
+    .gruppi {
+        padding: 20px;
+    }
+
+    .gruppi ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .gruppi ul li {
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 15px;
+        font-weight: normal;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .sezione-web {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .studenti {
+        margin-left: 15px; 
+        padding: 20px;
+        flex: 5;
+    }
+
+    .messaggi {
+        margin-right: 15px; 
+        padding: 20px;
+        min-width: 0;
+        flex: 3;
+    }
+
+    .studenti div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    
+    .studenti ul li p {
+        font-size: 1.15rem;
+        margin: 6px 0;
+    }
+
+    .selezione-gruppo {
+        gap: 12px;
+    }
+
+    .selezione-gruppo select {
+        padding: 12px;
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .selezione-gruppo button {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .btn{
+        padding: 10px 25px;
+    }
+}
