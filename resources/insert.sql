@@ -8,7 +8,9 @@ INSERT INTO utenti (id_utente, nome, cognome, email, password, ruolo, stato) VAL
 (5, 'Lorenzo', 'Russo', 'lorenzo.russo@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
 (6, 'Emma', 'Gallo', 'emma.gallo@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
 (7, 'Tommaso', 'Costa', 'tommaso.costa@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
-(8, 'Sara', 'Fontana', 'sara.fontana@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo');
+(8, 'Sara', 'Fontana', 'sara.fontana@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
+(9, 'Admin', 'Almahub', 'admin@almahub.it', '$2y$10$.ksmnbBHcBck0Vghv/IeHujQXgW80eT5SAfKJlAoLGhe8rmQk2JFy', 'admin', 'attivo'),
+(9, 'Mario', 'Rossi', 'mario.rossi@almahub.it', '$2y$10$.ksmnbBHcBck0Vghv/IeHujQXgW80eT5SAfKJlAoLGhe8rmQk2JFy', 'user', 'attivo');
 
 
 INSERT INTO gruppi (id_gruppo, titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, membri_max, id_creatore, stato) VALUES
