@@ -43,11 +43,9 @@ class DatabaseHelper {
     }
 
     public function getAvailableGroups(int $idUtente) :array {
-        $query = "SELECT * FROM gruppi 
+        $stmt = $this->db->prepare("SELECT * FROM gruppi 
                     WHERE id_gruppo NOT IN 
-                    (SELECT id_gruppo FROM iscrizioni WHERE id_utente = ?)";
-        
-        $stmt = $this->db->prepare($query);
+                    (SELECT id_gruppo FROM iscrizioni WHERE id_utente = ?)");
         $stmt->bind_param("i", $idUtente);
         $stmt->execute();
         $result = $stmt->get_result();
