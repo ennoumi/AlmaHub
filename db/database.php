@@ -262,37 +262,37 @@ class DatabaseHelper {
 
     // Iscrizione al gruppo, verifica se il gruppo esiste, se è pieno o se si è già iscritti
     public function joinGroup(int $idUtente, int $idGruppo, string $ruolo="Membro") {
-    $details = $this->getGroupDetails($idGruppo);
-    if (empty($details)) {
-        return -1; // Gruppo inesistente
-    }
+        $details = $this->getGroupDetails($idGruppo);
+        if (empty($details)) {
+            return -1; // Gruppo inesistente
+        }
 
-    if ($this->countGroupParticipants($idGruppo) >= $details['membri_max']) {
-        return 1; // Codice per "Gruppo Pieno"
-    }
+        if ($this->countGroupParticipants($idGruppo) >= $details['membri_max']) {
+            return 1; // Codice per "Gruppo Pieno"
+        }
 
-    try {
-        if($ruolo == "Fondatore") {
-            $statoIniziale = "confermato";
-        } else {
-            $tipologia = $details['tipo'];
-            $statoIniziale = ($tipologia == "Elaborato") ? "in_attesa" : "confermato"; //Se il gruppo è di elaborato inizialmente lo stato di iscrizione è "in attesa", altrimenti "confermato"
+        try {
+            if($ruolo == "Fondatore") {
+                $statoIniziale = "confermato";
+            } else {
+                $tipologia = $details['tipo'];
+                $statoIniziale = ($tipologia == "Elaborato") ? "in_attesa" : "confermato"; //Se il gruppo è di elaborato inizialmente lo stato di iscrizione è "in attesa", altrimenti "confermato"
+            }
+            
+            $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo, stato, ruolo) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("iiss", $idUtente, $idGruppo, $statoIniziale, $ruolo);
+            
+            if ($stmt->execute()) {
+                $stmt->close();
+                return $statoIniziale == "confermato" ? 0 : 3; // Restituisce lo stato dell'iscrizione
+            }
+        } catch (mysqli_sql_exception $e) {
+            if ($e->getCode() === 1062) { // Codice per "duplicate entry" dell'insert
+                return 2; // Codice per "Già iscritto"
+            }
         }
-        
-        $stmt = $this->db->prepare("INSERT INTO iscrizioni (id_utente, id_gruppo, stato, ruolo) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiss", $idUtente, $idGruppo, $statoIniziale, $ruolo);
-        
-        if ($stmt->execute()) {
-            $stmt->close();
-            return $statoIniziale == "confermato" ? 0 : 3; // Restituisce lo stato dell'iscrizione
-        }
-    } catch (mysqli_sql_exception $e) {
-        if ($e->getCode() === 1062) {
-            return 2; // Codice per "Già iscritto"
-        }
+            return -1; // Errore generico
     }
-        return -1; // Errore generico
-}
 
     public function createGroup(string $tipo, string $titolo, string $corso, string $descrizione, string $luogo, string $orario, int $maxMembri, int $idCreatore) {
         $stmt = $this->db->prepare("INSERT INTO gruppi (tipo, titolo, corso, descrizione, luogo_incontro, orario_incontro, membri_max, id_creatore, stato) 
