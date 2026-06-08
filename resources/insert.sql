@@ -1,7 +1,7 @@
 USE almahub;
 
 INSERT INTO utenti (id_utente, nome, cognome, email, password, ruolo, stato) VALUES
-(1, 'Marco', 'Rossi', 'admin@almahub.it', '$2y$10$abcdefghijklmnopqrstuvwxAdminHashExample12345', 'admin', 'attivo'),
+(1, 'Marco', 'Rossi', 'marco.rossi@almahub.it', '$2y$10$abcdefghijklmnopqrstuvwxAdminHashExample12345', 'user', 'attivo'),
 (2, 'Sofia', 'Bianchi', 'sofia.bianchi@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
 (3, 'Alessandro', 'Verdi', 'alessandro.verdi@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
 (4, 'Giulia', 'Ferrari', 'giulia.ferrari@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
@@ -10,7 +10,7 @@ INSERT INTO utenti (id_utente, nome, cognome, email, password, ruolo, stato) VAL
 (7, 'Tommaso', 'Costa', 'tommaso.costa@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
 (8, 'Sara', 'Fontana', 'sara.fontana@studio.unibo.it', '$2y$10$abcdefghijklmnopqrstuvwxUserHashExample12345', 'user', 'attivo'),
 (9, 'Admin', 'Almahub', 'admin@almahub.it', '$2y$10$.ksmnbBHcBck0Vghv/IeHujQXgW80eT5SAfKJlAoLGhe8rmQk2JFy', 'admin', 'attivo'),
-(9, 'Mario', 'Rossi', 'mario.rossi@almahub.it', '$2y$10$.ksmnbBHcBck0Vghv/IeHujQXgW80eT5SAfKJlAoLGhe8rmQk2JFy', 'user', 'attivo');
+(10, 'Mario', 'Rossi', 'mario.rossi@almahub.it', '$2y$10$.ksmnbBHcBck0Vghv/IeHujQXgW80eT5SAfKJlAoLGhe8rmQk2JFy', 'user', 'attivo');
 
 
 INSERT INTO gruppi (id_gruppo, titolo, corso, descrizione, tipo, luogo_incontro, orario_incontro, membri_max, id_creatore, stato) VALUES
