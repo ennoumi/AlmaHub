@@ -30,10 +30,9 @@ class DatabaseHelper {
     /*Funzione per richiamare dal DB i gruppi a cui l'utente loggato è iscritto */
 
     public function getPersonalGroups(int $userId) :array {
-        $stmt = $this->db->prepare("SELECT G.id_gruppo, tipo, titolo, corso FROM gruppi G 
-                                    JOIN iscrizioni I ON G.id_gruppo = I.id_gruppo 
-                                    JOIN utenti U ON U.id_utente=I.id_utente
-                                    WHERE U.id_utente = ?");
+        $stmt = $this->db->prepare("SELECT G.id_gruppo, G.tipo, G.titolo, G.corso 
+                                    FROM gruppi G JOIN iscrizioni I ON G.id_gruppo = I.id_gruppo 
+                                    WHERE I.id_utente = ? AND I.stato = 'confermato'");
         if (!$stmt) return [];
 
         $stmt->bind_param("i", $userId);
