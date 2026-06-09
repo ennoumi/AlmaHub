@@ -25,6 +25,10 @@ h1 {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
+.success, .error {
+    margin-left: 10px;
+}
+
 .info-desc {
     font-weight: bold;
 }
@@ -86,5 +90,9 @@ legend {
         display: block;
         margin: 15px auto 15px auto;
         width: 80%;
+    }
+
+    .success, .error {
+        margin-left: 150px;
     }
 }

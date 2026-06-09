@@ -15,10 +15,10 @@
         <h1 class="gradient-text"><?php echo $templateParams['isOwner'] ? "Il mio profilo" : "Profilo di " . htmlspecialchars($user['nome'] . ' ' . $user['cognome']) ; ?></h1>
 
         <?php if (!empty($templateParams['errore'])): ?>
-            <p style="color: red;"><?php echo htmlspecialchars($templateParams['errore']); ?></p>
+            <p class="error" style="color: red;"><?php echo htmlspecialchars($templateParams['errore']); ?></p>
         <?php endif; ?>
         <?php if (!empty($templateParams['successo'])): ?>
-            <p style="color: green;"><?php echo htmlspecialchars($templateParams['successo']); ?></p>
+            <p class="success" style="color: green;"><?php echo htmlspecialchars($templateParams['successo']); ?></p>
         <?php endif; ?>
 
         <?php if ($templateParams['isOwner']): ?>
