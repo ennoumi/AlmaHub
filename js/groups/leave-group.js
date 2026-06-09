@@ -1,5 +1,5 @@
 function leaveGroup() {
-    document.getElementById('disiscrizione')?.addEventListener('submit', function(e) {
+    document.getElementById('disiscrizione').addEventListener('submit', function(e) {
     e.preventDefault();
 
     // Conferma di uscita
