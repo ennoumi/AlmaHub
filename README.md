@@ -21,7 +21,7 @@ cd AlmaHub
 ```
 http://localhost/phpmyadmin/
 ```
-5. Inserire il contenuto dei seguenti file SQL per creare il database e popolarlo:
+5. Nel pannello SQL di phpMyAdmin, inserire i seguenti file SQL nell'ordine indicato per creare il database e popolarlo:
 ```
 resources/database.sql 
 resources/insert.sql
