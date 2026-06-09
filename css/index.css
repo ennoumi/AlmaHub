@@ -1,6 +1,7 @@
 body {
     background: linear-gradient(135deg, #e6f0ff, #cce0ff);
     text-align: center;
+    min-height: 100vh;  
 }
 
 .container {
