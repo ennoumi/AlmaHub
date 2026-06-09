@@ -47,6 +47,8 @@
 
     <script src="../js/groups/join-group.js"></script>
     <script src="../js/groups/leave-group.js"></script>
+    <script src="../js/admin/delete-group.js"></script>
+
 
     <?php if ($isSubscribed || isAdmin()): ?>
         <div class="chat-container">
@@ -82,6 +84,12 @@
             <form id="disiscrizione">
                 <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
                 <button type="submit" class="btn btn-primary leave-group" onclick="leaveGroup()">ESCI DAL GRUPPO</button>
+            </form>
+        <?php endif; ?>
+        <?php if (isAdmin()): ?>
+            <form id="eliminazione">
+                <input type="hidden" name="id_gruppo" value="<?php echo $idGruppo; ?>">
+                <button type="submit" class="btn btn-primary leave-group" onclick="deleteGroup()">ELIMINA GRUPPO</button>
             </form>
         <?php endif; ?>
     <?php endif; ?>

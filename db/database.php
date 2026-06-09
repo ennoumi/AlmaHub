@@ -137,6 +137,20 @@ class DatabaseHelper {
         return $groups;
     }
 
+    public function deleteGroup(int $idGruppo): bool {
+        $stmt = $this->db->prepare("DELETE FROM gruppi WHERE id_gruppo = ?");
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("i", $idGruppo);
+        
+        $success = $stmt->execute();
+        $stmt->close();
+        
+        return $success;
+    }
+
     /* Funzione che restituisce i messaggi che sono stati inviati nella chat di un gruppo */
     public function getMessagesForAdmin(int $idGruppo): array {
         $stmt = $this->db->prepare("SELECT m.data_invio, u.nome, u.cognome, m.corpo_messaggio
