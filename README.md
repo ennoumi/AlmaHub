@@ -32,8 +32,13 @@ http://localhost/AlmaHub/public/index.php
 ```
 7. Accedere con le credenziali *admin* mediante:
 ```
-Username: admin@almahub.it
+Email: admin@almahub.it
 Password: password
 ````
-8. Oppure registrarsi come nuovo utente e accedere con le proprie credenziali.
+8. Per accedere da utente utilizzare:
+```
+Email: mario.rossi@almahub.it
+Password: password
+```
+Oppure registrarsi come nuovo utente e accedere con le proprie credenziali.
 ---
