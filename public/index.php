@@ -26,7 +26,7 @@
     </section>
 
     <section>
-        <img src="./asset/index.jpeg" alt="" width=650px>
+        <img src="./asset/index.jpeg" alt="" width=650px class="indeximg">
     </section>
 
     <section class="features">

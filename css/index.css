@@ -63,3 +63,17 @@ body {
 .feature-card h3 {
     margin-bottom: 10px;
 }
+
+.indeximg {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .indeximg {
+        display: block;
+        width: 650px;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+}
