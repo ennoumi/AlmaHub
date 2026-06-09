@@ -55,7 +55,7 @@ class DatabaseHelper {
 
     /* Funzione che restituisce tutti gli utenti per la tabella admin */
     public function getAllUsers() :array {
-        $stmt = $this->db->prepare("SELECT id_utente, nome, cognome, email, ruolo, stato, data_iscrizione FROM utenti ORDER BY cognome, nome");
+        $stmt = $this->db->prepare("SELECT id_utente, nome, cognome, email, ruolo, stato, data_iscrizione FROM utenti WHERE ruolo = 'user' ORDER BY cognome, nome");
         if (!$stmt) return [];
 
         $stmt->execute();
