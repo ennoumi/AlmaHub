@@ -41,4 +41,3 @@ Email: mario.rossi@almahub.it
 Password: password
 ```
 Oppure registrarsi come nuovo utente e accedere con le proprie credenziali.
----
