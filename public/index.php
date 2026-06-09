@@ -25,6 +25,10 @@
       </div>
     </section>
 
+    <section>
+        <img src="./asset/index.jpeg" alt="" width=650px>
+    </section>
+
     <section class="features">
       <h2>Perché scegliere AlmaHub?</h2>
 
@@ -44,7 +48,6 @@
           <h3>Design Inclusivo</h3>
           <p>Interfaccia ad alto contrasto ottimizzata per l’accessibilità.</p>
         </article>
-
       </div>
     </section>
 
